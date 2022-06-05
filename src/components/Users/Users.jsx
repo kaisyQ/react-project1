@@ -27,7 +27,17 @@ const Users = (props) => {
             }
             </div>
             <div className='users'>
-                {props.usersToShow.map(user => <User key={user.id} user={user} follow={props.follow}/>)}
+                { props.usersToShow.map(user => 
+                    <User 
+                        key={user.id} 
+                        user={user} 
+                        userInFollowingProcess={props.userInFollowingProcess}
+                        deleteUserInFollowArr={props.deleteUserInFollowArr}
+                        pushUserToFollowArr={props.pushUserToFollowArr} 
+                        follow={props.follow}
+                    />
+                 )
+                }
             </div>
         </div>
     )

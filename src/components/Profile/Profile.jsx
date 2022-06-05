@@ -9,7 +9,7 @@ const Profile = (props) => {
         return <></>
     } else {
         return <div className={css.content}>
-                <ProfileInformation {...props.profileInfo} />
+                <ProfileInformation {...props} />
                 <PostsContainer />
             </div>
     }

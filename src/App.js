@@ -1,4 +1,4 @@
-import { Route, BrowserRouter, Switch } from 'react-router-dom'
+import { Route, BrowserRouter, Routes } from 'react-router-dom'
 
 import './App.css'
 
@@ -12,7 +12,6 @@ import DialogContainer from './components/Dialogs/DialogsContainer'
 import UsersContainer from './components/Users/UsersContainer'
 import ProfileContainer from './components/Profile/ProfileContainer'
 
-
 const App = () => {
     return (
         <BrowserRouter>
@@ -20,14 +19,15 @@ const App = () => {
                 <Header />
                 <NavBar />
                 <div className='app-wrapper-content'>
-                    <Switch>
-                        <Route path='/Dialogs' component={DialogContainer} />
-                        <Route path='/Profile/' component={ProfileContainer} />
-                        <Route path='/News' component={News} />
-                        <Route path='/Music' component={Music} />
-                        <Route path='/Settings' component={Settings} />
-                        <Route path='/Users' component={UsersContainer} />
-                    </Switch>
+                    <Routes>
+                        <Route path='/Dialogs' element={ < DialogContainer />} />
+                        <Route path='/Profile' element={<ProfileContainer />} />
+                        <Route path='/Profile/:id' element={<ProfileContainer />} />
+                        <Route path='/News' element={<News />} />
+                        <Route path='/Music' element={<Music />} />
+                        <Route path='/Settings' element={<Settings />} />
+                        <Route path='/Users' element={<UsersContainer />} />
+                    </Routes>
                 </div>
             </div>
         </BrowserRouter>
