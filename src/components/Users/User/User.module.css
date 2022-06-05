@@ -1,0 +1,19 @@
+.container {
+    margin: 0;
+}
+
+.container img {
+    width: 80px;
+}
+
+.container > .item {
+    margin: 25px 50px;
+    padding-bottom: 15px;
+    display: flex;
+    border: 5px solid black;
+}
+
+.itemStatus {
+    padding-top: 35px;
+    padding-left: 60px;
+}

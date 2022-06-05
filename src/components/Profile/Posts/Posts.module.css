@@ -1,0 +1,29 @@
+.Posts {
+    width: 700px;
+}
+
+.Posts > h3 {
+    width: 220px;
+    margin: 20px auto;
+    color: antiquewhite;
+}
+
+.Posts > textarea {
+    display: block;
+    margin: 0 auto;
+    width: 300px;
+    height: 100px;
+    font-size: 16px;
+    border: 0;
+}
+
+.Posts > .createButton {
+    display: block;
+    width: 150px;
+    border: 0;
+    margin: 35px auto;
+}
+
+.Posts > .createButton:hover {
+    cursor: pointer;
+}
