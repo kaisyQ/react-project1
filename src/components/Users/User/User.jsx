@@ -16,7 +16,6 @@ const User = props => {
                 'API-KEY': '0f42339c-8c45-4d01-8de8-9007b7db8bf6'
             }
         }).then(response => {
-            console.log(response)
             if (response.data.resultCode === 0) {
                 props.deleteUserInFollowArr(id)  
                 props.follow(id)  
@@ -26,13 +25,12 @@ const User = props => {
 
     const onUnFollow = (id) => {
         props.pushUserToFollowArr(id)
-        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, { 
+        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, { 
             withCredentials: true,
             headers: {
                 'API-KEY': '0f42339c-8c45-4d01-8de8-9007b7db8bf6'
             }
         }).then(response => {
-            console.log(response)
             if (response.data.resultCode === 0) {
                 props.deleteUserInFollowArr(id)  
                 props.follow(id)  

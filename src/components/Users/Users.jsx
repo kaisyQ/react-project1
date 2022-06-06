@@ -1,6 +1,8 @@
 import React from 'react'
 import Preloader from '../Common/Preloader/Preloader'
 
+import css from './Users.module.css'
+
 import User from './User/User'
 
 const Users = (props) => {
@@ -10,20 +12,44 @@ const Users = (props) => {
     }
 
     const countOfPageNumbers = Math.ceil( props.totalCount / props.pageCount )
-
     let tempArrOfPageNumbers = []
-
-    for (let i = 1; i <= countOfPageNumbers; ++i) {
-        tempArrOfPageNumbers.push(i)
+    if (countOfPageNumbers - props.currentPage < 10) {
+        tempArrOfPageNumbers.push(1)
+        for(let i = countOfPageNumbers - 9; i < countOfPageNumbers; ++i) {
+            tempArrOfPageNumbers.push(i)
+        }
+    } else {
+        switch (props.currentPage) {
+            case 1:
+                for(let i = 0; i < 9; ++i) {
+                    tempArrOfPageNumbers.push(props.currentPage + i)
+                }
+                break
+            case 2:
+                for(let i = 0; i < 9; ++i) {
+                    tempArrOfPageNumbers.push(props.currentPage - 1 + i)
+                }
+                break
+            default:
+                tempArrOfPageNumbers.push(1)
+                for(let i = 0; i < 8; ++i) {
+                    tempArrOfPageNumbers.push(props.currentPage + i)
+                }
+                break   
+        }
     }
+
+
+    tempArrOfPageNumbers.push(countOfPageNumbers)
+        
     
     return (
         <div className='users-wrapper'>
             { props.isFetching ? <Preloader/> : null }
 
-            <div className='user-nav'>
+            <div className={css.userNav}>
             {   
-                tempArrOfPageNumbers.map((num, index) => <span onClick={() => onPageNumberClick(index + 1)} key={index}> {num} </span>)
+                tempArrOfPageNumbers.map((num, index) => <div onClick={() => onPageNumberClick(num)} key={ index }> {num} </div>)
             }
             </div>
             <div className='users'>
