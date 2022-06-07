@@ -1,5 +1,4 @@
 import React from "react"
-import axios from 'axios'
 
 import {NavLink} from 'react-router-dom'
 
@@ -9,33 +8,11 @@ import defaultUserImage from '../../../Images/User.png'
 const User = props => {
 
     const onFollow = (id) => {
-        props.pushUserToFollowArr(id)
-        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, {}, { 
-            withCredentials: true,
-            headers: {
-                'API-KEY': '0f42339c-8c45-4d01-8de8-9007b7db8bf6'
-            }
-        }).then(response => {
-            if (response.data.resultCode === 0) {
-                props.deleteUserInFollowArr(id)  
-                props.follow(id)  
-            } 
-        })
+        props.makeUserFollowed(id)
     }
 
     const onUnFollow = (id) => {
-        props.pushUserToFollowArr(id)
-        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`, { 
-            withCredentials: true,
-            headers: {
-                'API-KEY': '0f42339c-8c45-4d01-8de8-9007b7db8bf6'
-            }
-        }).then(response => {
-            if (response.data.resultCode === 0) {
-                props.deleteUserInFollowArr(id)  
-                props.follow(id)  
-            } 
-        })
+        props.makeUserUnfollowed(id)
     }
 
     return (

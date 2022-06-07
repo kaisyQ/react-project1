@@ -3,6 +3,8 @@ import Preloader from '../Common/Preloader/Preloader'
 
 import css from './Users.module.css'
 
+import { makeNavArr } from './UsersTEMP'
+
 import User from './User/User'
 
 const Users = (props) => {
@@ -11,38 +13,7 @@ const Users = (props) => {
         props.getUsersToShow(spanIndex)
     }
 
-    const countOfPageNumbers = Math.ceil( props.totalCount / props.pageCount )
-    let tempArrOfPageNumbers = []
-    if (countOfPageNumbers - props.currentPage < 10) {
-        tempArrOfPageNumbers.push(1)
-        for(let i = countOfPageNumbers - 9; i < countOfPageNumbers; ++i) {
-            tempArrOfPageNumbers.push(i)
-        }
-    } else {
-        switch (props.currentPage) {
-            case 1:
-                for(let i = 0; i < 9; ++i) {
-                    tempArrOfPageNumbers.push(props.currentPage + i)
-                }
-                break
-            case 2:
-                for(let i = 0; i < 9; ++i) {
-                    tempArrOfPageNumbers.push(props.currentPage - 1 + i)
-                }
-                break
-            default:
-                tempArrOfPageNumbers.push(1)
-                for(let i = 0; i < 8; ++i) {
-                    tempArrOfPageNumbers.push(props.currentPage + i)
-                }
-                break   
-        }
-    }
-
-
-    tempArrOfPageNumbers.push(countOfPageNumbers)
-        
-    
+    let tempArrOfPageNumbers = makeNavArr(props.currentPage, Math.ceil( props.totalCount / props.pageCount ))
     return (
         <div className='users-wrapper'>
             { props.isFetching ? <Preloader/> : null }
@@ -61,6 +32,8 @@ const Users = (props) => {
                         deleteUserInFollowArr={props.deleteUserInFollowArr}
                         pushUserToFollowArr={props.pushUserToFollowArr} 
                         follow={props.follow}
+                        makeUserFollowed={props.makeUserFollowed}
+                        makeUserUnfollowed={props.makeUserUnfollowed}
                     />
                  )
                 }

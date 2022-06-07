@@ -1,3 +1,5 @@
+import { followAPI, usersAPI } from "../api/api"
+
 const LOAD_USERS = 'LOAD-USERS'
 const FOLLOW_USER = 'FOLLOW-USER'
 const CHANGE_CURRENT_PAGE = 'CHANGE-CURRENT-PAGE'
@@ -71,4 +73,44 @@ const usersReducer = (state=defaultStateValue, action) => {
 
 }
 
+export const getUsers = (page) => {
+    return (dispatch) => {
+        dispatch(usersActionCreater.changeFetching(true))
+        usersAPI.getUsersFromServer(page).then( response => {
+            dispatch(usersActionCreater.totalCount(response.data.totalCount))
+            dispatch(usersActionCreater.loadUsers(response.data.items))
+            dispatch(usersActionCreater.changeFetching(false))
+        })
+    }
+}
+
+export const getUserAtNumPage = (page, count) => (dispatch) => {
+    dispatch(usersActionCreater.changeFetching(true))
+    
+        usersAPI.getPageUsersFromServer(page, count).then( response => {
+            dispatch(usersActionCreater.loadUsers(response.data.items))
+            dispatch(usersActionCreater.totalCount(response.data.totalCount))
+            dispatch(usersActionCreater.changeFetching(false))
+        })
+}
+
+export const makeUserFollowed = (id) => (dispatch) => {
+    dispatch(usersActionCreater.pushUserToFollowArr(id))
+        followAPI.followUser(id).then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(usersActionCreater.deleteUserInFollowArr(id)) 
+                dispatch(usersActionCreater.follow(id))  
+            } 
+        })
+}
+
+export const makeUserUnfollowed = (id) => (dispatch) => {
+    dispatch(usersActionCreater.pushUserToFollowArr(id))
+        followAPI.unfollowUser(id).then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(usersActionCreater.deleteUserInFollowArr(id)) 
+                dispatch(usersActionCreater.follow(id))  
+            } 
+        })
+}
 export default usersReducer

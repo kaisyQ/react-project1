@@ -1,42 +1,18 @@
 import React from "react"
-import axios from 'axios'
 
 import { connect } from "react-redux"
-import { usersActionCreater } from "../../redux/users-reducer"
+import { usersActionCreater, getUsers, getUserAtNumPage, makeUserFollowed, makeUserUnfollowed } from "../../redux/users-reducer"
 
 import Users from "./Users"
 
 class UsersAPIContainer extends React.Component {
 
     componentDidMount = () => {
-        this.props.changeFetching(true) 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPageData.currentPage}`, {
-            withCredentials:true,
-
-        }).then
-        (
-            response => {
-                this.props.loadUsers(response.data.items)
-                this.props.setTotalCount(response.data.totalCount)
-                this.props.changeFetching(false) 
-                
-            }
-        )
+        this.props.getUsers(1)
     }
     
     getUsersToShow = (num) => {
-        const countOfUsersOnPage = this.props.usersPageData.pageCount
-
-        this.props.changeFetching(true) 
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${num}&count=${countOfUsersOnPage}`,{
-            withCredentials: true
-        }).then
-        (
-            response => {
-                this.props.loadUsers(response.data.items)
-                this.props.changeFetching(false)
-            }
-        )
+        this.props.getUserAtNumPage(num, this.props.usersPageData.pageCount)
     }
 
 
@@ -51,11 +27,10 @@ class UsersAPIContainer extends React.Component {
                 userInFollowingProcess={this.props.usersPageData.userInFollowingProcess}
 
                 getUsersToShow={this.getUsersToShow}
-                follow={this.props.follow}
                 changeCurrentPage={this.props.changeCurrentPage}
-                changeFetching={this.props.changeFetching}
-                pushUserToFollowArr={this.props.pushUserToFollowArr}
-                deleteUserInFollowArr={this.props.deleteUserInFollowArr}
+
+                makeUserFollowed={this.props.makeUserFollowed}
+                makeUserUnfollowed={this.props.makeUserUnfollowed}
             />  
         )
     }
@@ -68,19 +43,18 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDisptchToProps = (dispatch) => {
-    return {
-        loadUsers: (newUsers) => { dispatch(usersActionCreater.loadUsers(newUsers)) },
-        follow: (id) => { dispatch(usersActionCreater.follow(id)) },
-        changeCurrentPage: (pageNumber) => { dispatch(usersActionCreater.changeCurrentPage(pageNumber)) },
-        setTotalCount: (number) => { dispatch(usersActionCreater.totalCount(number)) },
-        changeFetching: (changeHow) => { dispatch(usersActionCreater.changeFetching(changeHow)) },
-        pushUserToFollowArr: (pushingUserId) => {dispatch(usersActionCreater.pushUserToFollowArr(pushingUserId)) },
-        deleteUserInFollowArr: (deleteUserId) => {dispatch(usersActionCreater.deleteUserInFollowArr(deleteUserId)) }
-    }
+let mapDispatchToProps = {
+    follow: usersActionCreater.follow,
+    changeCurrentPage: usersActionCreater.changeCurrentPage,
+    pushUserToFollowArr: usersActionCreater.pushUserToFollowArr,
+    deleteUserInFollowArr: usersActionCreater.deleteUserInFollowArr,
+    getUsers,
+    getUserAtNumPage,
+    makeUserFollowed,
+    makeUserUnfollowed
 }
 
 
-let UsersContainer = connect(mapStateToProps, mapDisptchToProps)(UsersAPIContainer)
+let UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIContainer)
 
 export default UsersContainer
