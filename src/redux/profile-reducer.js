@@ -1,3 +1,5 @@
+import { authAPI, profileAPI } from "../api/api"
+
 const DEFAULT_POST_TEXT = 'Write here something new'
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
@@ -53,5 +55,22 @@ export const setProfileActionCreater = (profile) => {
     }
 }
 
+export const setProfileThunk = (userId) => (dispatch) => {
+    if (!userId) {
+        authAPI.checkAuthMe().then(response => {
+            if (response.data.resultCode === 0) {
+                profileAPI.getProfile(response.data.data.id).then(response => {
+                    dispatch(setProfileActionCreater(response.data))
+                })
+            } else {
+                console.error('err')
+            }
+        })
+    } else {
+        profileAPI.getProfile(userId).then(response => {
+            dispatch(setProfileActionCreater(response.data))
+        })
+    }
+}
 
 export default profileReducer

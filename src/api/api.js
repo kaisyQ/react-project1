@@ -17,6 +17,12 @@ export const usersAPI = {
         return instance.get(`users/?page=${page}&count=${count}`)
     }
 }
+
+export const profileAPI = {
+    getProfile (id) {
+        return instance.get(`profile/${id}`)
+    }
+}
  
 export const followAPI = {
     getInfoAboutFollowing (id) {

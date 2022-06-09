@@ -1,6 +1,6 @@
 import React from "react"
 
-import { NavLink } from 'react-router-dom'
+import { Navigate  } from 'react-router-dom'
 
 import css from './Header.module.css'
 
@@ -8,6 +8,9 @@ const Header = (props) => {
     const checkLogin = () => {
         props.isAuthThunk()
     }
+    //if ( !props.authData.isAuth ) {
+    //    return <Navigate to={'/Users'}/>
+    //}
     return (
         <header className={css.header}>
             <img src="./logo.png" alt=""/>
@@ -18,7 +21,7 @@ const Header = (props) => {
                     <span>{props.authData.userData.data.login}</span>
                 :
                     <button onClick={checkLogin} >Log in</button>
-            }       
+            }
         </header>
     )
 }

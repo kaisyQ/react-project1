@@ -1,19 +1,16 @@
 import React from "react"
-import axios from "axios"
 
 import { connect } from "react-redux"
 import { useParams } from "react-router-dom"
 
 import Profile from "./Profile"
 
-import {setProfileActionCreater} from './../../redux/profile-reducer'
+import { setProfileThunk } from './../../redux/profile-reducer'
 
 class ProfileAPIContainer extends React.Component {
 
     componentDidMount () {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${this.props.userId}`).then(response => {
-            this.props.setProfile(response.data)
-        })
+        this.props.setProfileThunk(this.props.userId)
     }
 
     render () {
@@ -27,10 +24,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        setProfile: (profile) => { dispatch(setProfileActionCreater(profile)) }
-    }
+const mapDispatchToProps = {
+    setProfileThunk
 }
 
 const WithRouterProfileContainer = (props) => {
