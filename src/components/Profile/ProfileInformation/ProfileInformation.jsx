@@ -1,17 +1,44 @@
 import React from "react"
 
-const ProfileInformation = (props) => {
-    return <div className="userAboutContainer">
+class ProfileInformation extends React.Component {
+    constructor(props) {
+        super (props)
+        debugger
+        this.state = {
+            status: this.props.status,
+            statusOnFocus: false
+        }
+    } 
+    
+    componentDidUpdate() {
+
+    }
+
+    onStatusDoubleClick = (e) => {
+        this.setState({statusOnFocus: !this.state.statusOnFocus})
+    }
+
+    render = () => {
+        return <div className="userAboutContainer">
         <div>
-            <img src={props.profileInfo.photos.large} alt="" />
+            <img src={this.props.profileInfo.photos.large} alt="" />
         </div>
+        <div onDoubleClick={this.onStatusDoubleClick}>
+            {
+                !this.state.statusOnFocus
+                    ?   <span>{this.state.status}</span>
+                    :   <input type='text' value={this.state.status}/>
+            }
+        </div>
+
         <div className="userAboutInfo">
-            <div>{props.profileInfo.fullName}</div>
-            <div>{props.profileInfo.aboutMe}</div>
-            <div>{props.profileInfo.lookingForAJobDescription}</div>
-            <div>my vk : {props.profileInfo.contacts.vk}</div>
+            <div>{this.props.profileInfo.fullName}</div>
+            <div>{this.props.profileInfo.aboutMe}</div>
+            <div>{this.props.profileInfo.lookingForAJobDescription}</div>
+            <div>my vk : {this.props.profileInfo.contacts.vk}</div>
         </div >
     </div>
+    }
 }
 
 export default ProfileInformation

@@ -21,6 +21,9 @@ export const usersAPI = {
 export const profileAPI = {
     getProfile (id) {
         return instance.get(`profile/${id}`)
+    },
+    getUserStatus(id) {
+        return instance.get(`profile/status/${id}`)
     }
 }
  

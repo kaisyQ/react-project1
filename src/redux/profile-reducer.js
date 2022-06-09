@@ -4,45 +4,41 @@ const DEFAULT_POST_TEXT = 'Write here something new'
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const SET_PROFILE = 'SET-PROFILE'
+const SET_PROFILE_STATUS = 'SET-PROFILE-STATUS'
 
 
 
 const defaultStateValue = {
     posts: ['This is my first post', 'Hello, im fine ! :) '],
     newPostText: DEFAULT_POST_TEXT,
-    profile: null
+    profile: null,
+    status: ''
 } 
 
-const profileReducerMethods = {
-    createNewPost (state) {
-        return {
-            ...state,
-            posts: [...state.posts, state.newPostText],
-            newPostText: DEFAULT_POST_TEXT
-        }
-    },
-    changeNewPostText (state, text) {
-        return {
-            ...state,
-            newPostText: text
-        }
-    },
-    setProfile(state, profile) {
-        return {
-            ...state, 
-            profile: profile
-        }
-    }
-}
 
 const profileReducer = (state=defaultStateValue, action) => {
     switch (action.type) {
         case ADD_POST:
-            return profileReducerMethods.createNewPost(state)
+            return {
+                ...state,
+                posts: [...state.posts, state.newPostText],
+                newPostText: DEFAULT_POST_TEXT
+            }
         case UPDATE_NEW_POST_TEXT:
-            return profileReducerMethods.changeNewPostText(state, action.text)
+            return {
+                ...state,
+                newPostText: action.text
+            }
         case SET_PROFILE:
-            return profileReducerMethods.setProfile(state, action.profile)
+            return {
+                ...state, 
+                profile: action.profile
+            }
+        case SET_PROFILE_STATUS:
+            return {
+                ...state, 
+                status: action.status
+            }
         default:
             return state
     }
@@ -54,6 +50,13 @@ export const setProfileActionCreater = (profile) => {
         profile: profile
     }
 }
+export const setProfileStatusActionCreater = (status) => {
+    return {
+        type: SET_PROFILE_STATUS,
+        status: status
+    }
+}
+
 
 export const setProfileThunk = (userId) => (dispatch) => {
     if (!userId) {
@@ -71,6 +74,12 @@ export const setProfileThunk = (userId) => (dispatch) => {
             dispatch(setProfileActionCreater(response.data))
         })
     }
+}
+
+export const setProfileStatusThunk = (userId) => (dispatch) => {
+    profileAPI.getUserStatus(userId).then(response => {
+        dispatch(setProfileStatusActionCreater(response.data))
+    })
 }
 
 export default profileReducer
