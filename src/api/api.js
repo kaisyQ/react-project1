@@ -30,19 +30,8 @@ export const followAPI = {
     }
 }
 
-
-class BaseAPI {
-    constructor(entryPoint, dataParams) {
-        this._entryPoint = entryPoint
-        this._dataParams = dataParams
+export const authAPI = {
+    checkAuthMe(){
+        return instance.get('auth/me')
     }
-
-    getDataFromServer() {
-        return instance.get(`${this._entryPoint} + ${ this._dataParams ? this._dataParams.id.toString() : '' }`)
-    }  
-}
-
-class UsersAPI extends BaseAPI{}
-
-class FollowAPI extends BaseAPI{
 }
