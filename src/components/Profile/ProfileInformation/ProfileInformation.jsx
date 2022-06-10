@@ -3,19 +3,29 @@ import React from "react"
 class ProfileInformation extends React.Component {
     constructor(props) {
         super (props)
-        debugger
         this.state = {
-            status: this.props.status,
+            status: !this.props.status || this.props.status === '' ? 'Write your status here' : this.props.status,
             statusOnFocus: false
         }
     } 
     
-    componentDidUpdate() {
-
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.status !== prevProps.status) {
+            if (this.props.status) {
+                this.setState({ status: this.props.status })    
+            } else {
+                 this.setState({ status: 'Write your status here'})
+            }
+        }
     }
 
     onStatusDoubleClick = (e) => {
+        this.props.updateCurrentUserProfileStatus(this.state.status)
         this.setState({statusOnFocus: !this.state.statusOnFocus})
+    }
+
+    onStatusChange = (e) => {
+        this.setState({status: e.target.value})
     }
 
     render = () => {
@@ -23,7 +33,7 @@ class ProfileInformation extends React.Component {
         <div>
             <img src={this.props.profileInfo.photos.large} alt="" />
         </div>
-        <div onDoubleClick={this.onStatusDoubleClick}>
+        <div onDoubleClick={this.onStatusDoubleClick} onChange={this.onStatusChange}>
             {
                 !this.state.statusOnFocus
                     ?   <span>{this.state.status}</span>

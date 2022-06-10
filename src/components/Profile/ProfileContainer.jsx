@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom"
 
 import Profile from "./Profile"
 
-import { setProfileThunk, setProfileStatusThunk } from './../../redux/profile-reducer'
+import { setProfileThunk, setProfileStatusThunk, updateCurrentUserProfileStatus } from './../../redux/profile-reducer'
 
 class ProfileAPIContainer extends React.Component {
 
@@ -15,7 +15,10 @@ class ProfileAPIContainer extends React.Component {
     }
 
     render () {
-        return <Profile profileInfo={this.props.profile} status={this.props.status}/>
+        return  <Profile updateCurrentUserProfileStatus={this.props.updateCurrentUserProfileStatus}
+                    profileInfo={this.props.profile} 
+                    status={this.props.status}
+                />
     }
 }
 
@@ -28,7 +31,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     setProfileThunk,
-    setProfileStatusThunk
+    setProfileStatusThunk,
+    updateCurrentUserProfileStatus
 }
 
 const WithRouterProfileContainer = (props) => {
