@@ -1,6 +1,6 @@
 import { connect } from "react-redux"
 
-import { isAuthThunk } from '../../redux/auth-reducer'
+import { isAuthThunk, logout } from '../../redux/auth-reducer'
 
 import Header from "./Header"
 
@@ -10,7 +10,8 @@ const mapStateToProps = (state) => {
     }
 }
 const mapDispatchToProps = {
-    isAuthThunk
+    isAuthThunk, 
+    logout
 }
 
 let HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(Header)

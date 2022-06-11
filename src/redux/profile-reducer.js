@@ -7,7 +7,6 @@ const SET_PROFILE = 'SET-PROFILE'
 const SET_PROFILE_STATUS = 'SET-PROFILE-STATUS'
 const UPDATE_STATUS = 'UPDATE-STATUS'
 
-
 const defaultStateValue = {
     posts: ['This is my first post', 'Hello, im fine ! :) '],
     newPostText: DEFAULT_POST_TEXT,
@@ -64,6 +63,7 @@ export const setProfileStatusActionCreater = (status) => {
 export const updateStatusActionCreater = (newStatus) => {
     return { type: UPDATE_STATUS, newStatus}
 }
+
 
 export const setProfileThunk = (userId) => (dispatch) => {
     if (!userId) {

@@ -33,11 +33,12 @@ class ProfileInformation extends React.Component {
         <div>
             <img src={this.props.profileInfo.photos.large} alt="" />
         </div>
-        <div onDoubleClick={this.onStatusDoubleClick} onChange={this.onStatusChange}>
+        
+        <div onDoubleClick={this.onStatusDoubleClick}>
             {
                 !this.state.statusOnFocus
                     ?   <span>{this.state.status}</span>
-                    :   <input type='text' value={this.state.status}/>
+                    :   <input type='text' onChange={this.onStatusChange} value={this.state.status}/>
             }
         </div>
 

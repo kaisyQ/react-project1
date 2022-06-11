@@ -113,4 +113,6 @@ export const makeUserUnfollowed = (id) => (dispatch) => {
             } 
         })
 }
+
+
 export default usersReducer

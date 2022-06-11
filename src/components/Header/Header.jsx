@@ -1,26 +1,30 @@
 import React from "react"
 
-import { Navigate  } from 'react-router-dom'
-
 import css from './Header.module.css'
 
 const Header = (props) => {
     const checkLogin = () => {
         props.isAuthThunk()
     }
-    //if ( !props.authData.isAuth ) {
-    //    return <Navigate to={'/Users'}/>
-    //}
+
+    const logoutBtnClick = () => {
+        props.logout()
+    }
+
     return (
         <header className={css.header}>
             <img src="./logo.png" alt=""/>
             <h1>Social Network</h1>
             {
                 props.authData.isAuth 
-                ? 
-                    <span>{props.authData.userData.data.login}</span>
+                ?   <div>
+                        <span>{props.authData.userData.data.login}</span>
+                        <div>
+                            <button onClick={logoutBtnClick}>Log out</button>
+                        </div>
+                    </div>
                 :
-                    <button onClick={checkLogin} >Log in</button>
+                    <button onClick={checkLogin}>Log in</button>
             }
         </header>
     )

@@ -1,27 +1,37 @@
 import React from "react"
+import { Field, reduxForm } from "redux-form"
+import { Navigate  } from 'react-router-dom'
 
-
-const Login = () => {
-    return  <>
-        <h1>Login</h1>
-        <LoginForm />
-    </>
-}
-
-const LoginForm = () => {
-    return <form>
+let LoginForm = (props) => {
+    return <form onSubmit={props.handleSubmit}>
         <div>
-            <input type="text" /> Login
+            <Field type="text" component='input' name='email'/> Login
         </div>
         <div>
-            <input type="password"/ > Password
+            <Field type="password" component='input' name='password'/> Password
         </div>
         <div>
-            <input type="checkbox"/> Remember me
+            <Field type="checkbox" component='input' name='rememberMe'/> Remember me
         </div>
         <button>Log in</button>
     </form>
 }
+LoginForm = reduxForm({form: 'loginForm'})(LoginForm)
 
+const Login = (props) => {
+
+    if (props.isAuth) {
+        return <Navigate to='/Profile' /> 
+    }
+
+    const submitLoginForm = (values) => {
+        props.login(values.email, values.password, values.rememberMe)
+    }
+
+    return  <>
+        <h1>Log in</h1>
+        <LoginForm onSubmit={submitLoginForm}/>
+    </>
+}
 
 export default Login

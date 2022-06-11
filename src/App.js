@@ -6,12 +6,12 @@ import NavBar from './components/NavBar/NavBar'
 import News from './components/News/News'
 import Music from './components/Music/Music'
 import Settings from './components/Settings/Settings'
-import Login from './components/Login/Login'
 
 import DialogContainer from './components/Dialogs/DialogsContainer'
 import UsersContainer from './components/Users/UsersContainer'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import HeaderContainer from './components/Header/HeaderContainer'
+import LoginContainer from './components/Login/LoginContainer'
 
 const App = () => {
     return (
@@ -28,7 +28,7 @@ const App = () => {
                         <Route path='/Music' element={<Music />} />
                         <Route path='/Settings' element={<Settings />} />
                         <Route path='/Users' element={<UsersContainer />} />
-                        <Route path='/Login/*' element={ <Login />} />
+                        <Route path='/Login/*' element={ <LoginContainer />} />
                     </Routes>
                 </div>
             </div>
