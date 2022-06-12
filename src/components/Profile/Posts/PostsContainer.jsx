@@ -1,20 +1,11 @@
 import { connect } from "react-redux"
-import actionCreater from "../../../redux/action-creater"
+import { createNewPostActionCreater } from "../../../redux/profile-reducer"
 
 import Posts from "./Posts"
 
 
-let mapStateToProps = (state) => {
-    return { postPageData: state.postPageData }
-}
-
-
-let mapDispatchToProps = (dispatch) => {
-    return {
-        updateNewPostTextarea: (text) => { dispatch(actionCreater.updateNewPost(text))},
-        createNewPost: () => { dispatch(actionCreater.createNewPost()) }
-    }
-}
+const mapStateToProps = (state) => { return { postPageData: state.postPageData } }
+const mapDispatchToProps = { createNewPost: createNewPostActionCreater }
 
 const PostsContainer = connect(mapStateToProps, mapDispatchToProps)(Posts)
 

@@ -2,7 +2,6 @@ import { authAPI, profileAPI } from "../api/api"
 
 const DEFAULT_POST_TEXT = 'Write here something new'
 const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const SET_PROFILE = 'SET-PROFILE'
 const SET_PROFILE_STATUS = 'SET-PROFILE-STATUS'
 const UPDATE_STATUS = 'UPDATE-STATUS'
@@ -20,13 +19,7 @@ const profileReducer = (state=defaultStateValue, action) => {
         case ADD_POST:
             return {
                 ...state,
-                posts: [...state.posts, state.newPostText],
-                newPostText: DEFAULT_POST_TEXT
-            }
-        case UPDATE_NEW_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.text
+                posts: [...state.posts, action.text]
             }
         case SET_PROFILE:
             return {
@@ -47,6 +40,8 @@ const profileReducer = (state=defaultStateValue, action) => {
             return state
     }
 }
+
+export const createNewPostActionCreater = (text) => { return { type: ADD_POST, text } }
 
 export const setProfileActionCreater = (profile) => {
     return {

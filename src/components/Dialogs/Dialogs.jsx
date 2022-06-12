@@ -1,19 +1,23 @@
 import React from "react"
-import { NavLink } from "react-router-dom"
 import css from './Dialogs.module.css'
 
+import { NavLink } from "react-router-dom"
+import { Field, reduxForm } from 'redux-form'
+
+let SendMessageForm = (props) => {
+    return <form onSubmit={props.handleSubmit}>
+        <Field component='textarea' name='newMessageText'/>
+        <div>
+            <button> Send </button>
+        </div> 
+    </form>
+}
+
+SendMessageForm = reduxForm({form: 'sendMessageForm'})(SendMessageForm)
 
 const Dialogs = (props) => {
-    let newMessageTexareaRef = React.createRef()
 
-    const createNewMessage = () => {    
-        props.createNewMessage()
-    }
-
-    const newMessTextareaUpdade = () => {
-        let text = newMessageTexareaRef.current.value
-        props.updateNewMessageTextarea(text)
-    }
+    const createNewMessage = (values) => { props.createNewMessage(values.newMessageText) }
 
     return (
         <div className={css.content}>
@@ -23,13 +27,13 @@ const Dialogs = (props) => {
            <div className={css.messages}>
                 {props.dialogsPageData.messages.map( mess => <div className="message">{mess}</div>)}
                 <h4>new message</h4>
-                <textarea value={props.dialogsPageData.newMessText}ref={newMessageTexareaRef} onChange={newMessTextareaUpdade}></textarea>
-                <div className={css.buttonContainer}>
-                    <button onClick={ createNewMessage }>send</button>
-                </div>
+                <SendMessageForm onSubmit={createNewMessage}/>
            </div>
         </div>
     )
 }
+
+
+
 
 export default Dialogs

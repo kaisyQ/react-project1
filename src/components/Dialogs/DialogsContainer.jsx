@@ -1,5 +1,5 @@
 import { connect } from "react-redux"
-import actionCreater from "../../redux/action-creater"
+import { createNewMessageActionCreater } from "../../redux/dialogs-reducer"
 import Dialogs from './Dialogs'
 import withAuthRedirectContainer from "../../hoc/withAuthRedirect"
 
@@ -10,14 +10,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        updateNewMessageTextarea: (text) => { 
-            dispatch(actionCreater.updateNewMessage(text)) 
-        },
-        createNewMessage: () => { dispatch(actionCreater.createNewMessage()) }
-    }
-}
+const mapDispatchToProps = { createNewMessage: createNewMessageActionCreater }
 
 const RedirectDialogContainer = withAuthRedirectContainer(Dialogs)
 

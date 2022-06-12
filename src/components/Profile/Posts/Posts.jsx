@@ -1,25 +1,29 @@
 import React  from "react"
 import css from './Posts.module.css'
-
+import { Field, reduxForm } from "redux-form"
 import Post from './Post/Post'
 
+let CreatePostForm = (props) => {
+    return <form onSubmit={props.handleSubmit}>
+        <Field component='textarea' name='createNewPostTextarea'/>
+        <div>
+            <button>Create post</button>
+        </div> 
+    </form>
+}
+
+CreatePostForm = reduxForm ({ form:'createPostForm'}) (CreatePostForm)
+
 const Posts = (props) => {
-    let textAreaRef = React.createRef()
 
-    const createNewPost = () => {
-        props.createNewPost()
+    const createNewPost = (values) => {
+        props.createNewPost(values.createNewPostTextarea)
     }
 
-    const changeNewPostText = () => {
-        let text = textAreaRef.current.value
-        props.updateNewPostTextarea(text)
-    }
-    
     return (
         <div className={css.Posts}>
             <h3>Your new post : </h3>
-            <textarea ref={ textAreaRef } value={props.postPageData.newPostText} onChange={ changeNewPostText }></textarea>
-            <button className={ css.createButton } onClick={ createNewPost }>Create</button>
+            <CreatePostForm onSubmit={createNewPost}/>
             <h3>Posts :</h3>
             {props.postPageData.posts.map((mess, index) => <Post key={index} message={mess}/>)}
         </div>
