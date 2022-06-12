@@ -1,6 +1,5 @@
 import { authAPI, profileAPI } from "../api/api"
 
-const DEFAULT_POST_TEXT = 'Write here something new'
 const ADD_POST = 'ADD-POST'
 const SET_PROFILE = 'SET-PROFILE'
 const SET_PROFILE_STATUS = 'SET-PROFILE-STATUS'
@@ -8,7 +7,6 @@ const UPDATE_STATUS = 'UPDATE-STATUS'
 
 const defaultStateValue = {
     posts: ['This is my first post', 'Hello, im fine ! :) '],
-    newPostText: DEFAULT_POST_TEXT,
     profile: null,
     status: ''
 } 

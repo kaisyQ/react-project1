@@ -1,12 +1,9 @@
 import React from "react"
+import { NavLink } from "react-router-dom"
 
 import css from './Header.module.css'
 
 const Header = (props) => {
-    const checkLogin = () => {
-        props.isAuthThunk()
-    }
-
     const logoutBtnClick = () => {
         props.logout()
     }
@@ -16,15 +13,15 @@ const Header = (props) => {
             <img src="./logo.png" alt=""/>
             <h1>Social Network</h1>
             {
-                props.authData.isAuth 
+                props.isAuth 
                 ?   <div>
-                        <span>{props.authData.userData.data.login}</span>
+                        <span>{props.login}</span>
                         <div>
                             <button onClick={logoutBtnClick}>Log out</button>
                         </div>
                     </div>
                 :
-                    <button onClick={checkLogin}>Log in</button>
+                    <NavLink to='/Login'>Log in</NavLink>
             }
         </header>
     )

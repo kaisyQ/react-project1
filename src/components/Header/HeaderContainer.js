@@ -1,16 +1,17 @@
 import { connect } from "react-redux"
 
-import { isAuthThunk, logout } from '../../redux/auth-reducer'
+import { logout } from '../../redux/auth-reducer'
 
 import Header from "./Header"
 
 const mapStateToProps = (state) => {
     return {
-        authData: state.auth
+        isAuth: state.app.isAuth, 
+        email: state.app.email,
+        login: state.app.login
     }
 }
 const mapDispatchToProps = {
-    isAuthThunk, 
     logout
 }
 
