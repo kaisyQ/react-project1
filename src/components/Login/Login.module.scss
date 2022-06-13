@@ -1,0 +1,58 @@
+$loginFormWidth: 400px;
+
+
+.loginHeader {
+    h1 {
+        margin: 25px 0;
+        text-align: center;
+        font-size: 36px;
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    p {
+        padding: 0 85px;
+        font-size: 22px;
+        margin-bottom: 40px;
+    }
+}
+
+.loginForm {
+    position: relative;
+    left: 50%;
+    width: $loginFormWidth;
+    margin-left: -$loginFormWidth / 2;
+    font-family:'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
+    font-size: 26px;
+
+    .inputField {
+        width: 270px;
+        margin-bottom: 15px;
+        font-size: 22px;
+        padding: 4px;
+    }
+
+    .checkBoxField {
+        width: 20px;
+        height: 20px;
+    }
+
+    span {
+        padding-left: 10px;
+    }
+    
+    button {
+        width: 160px;
+        height: 40px;
+        margin: 30px 70px;
+        color: #fff;
+        background-color: #5410AE;
+        border: solid 1px #5410AE;
+        border-radius: 15px;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        transition: 500ms;
+        border: solid 1px #FDA32D;
+        color: #FDA32D;
+    }
+}

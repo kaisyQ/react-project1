@@ -2,7 +2,7 @@
     display: grid;
     grid-area: header;
     grid-template-columns: 1fr 6fr 1fr;
-    background-color: #0494d1;
+    background-color: #5410AE;
 }
 .header > img {
     width: 60px;

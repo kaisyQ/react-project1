@@ -3,7 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { appIsAuthThnk } from './redux/app-reducer'
 
-import './App.css'
+import './App.scss'
 
 import NavBar from './components/NavBar/NavBar'
 import News from './components/News/News'

@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: rgb(217, 219, 245);
+    background-color: #000;
 }
 
 .app-wrapper {
@@ -21,10 +21,11 @@ body {
     font-size: 24px;
 
     width: 1200px;
+    height: 100vh;
     margin: 0 auto;
 }
 
 .app-wrapper-content {
     grid-area: content;
-    background-color: green;
+    background-color: #fff;
 }
