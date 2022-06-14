@@ -7,7 +7,6 @@ import './App.scss'
 
 import NavBar from './components/NavBar/NavBar'
 import News from './components/News/News'
-import Music from './components/Music/Music'
 import Settings from './components/Settings/Settings'
 
 import DialogContainer from './components/Dialogs/DialogsContainer'
@@ -25,7 +24,6 @@ class App extends React.Component {
     }
 
     render () {
-        debugger
         if (this.props.isFetching) return <Preloader />
         return (
             <BrowserRouter>
@@ -34,11 +32,11 @@ class App extends React.Component {
                     <NavBar />
                     <div className='app-wrapper-content'>
                         <Routes>
+                            <Route path='/' element={ <News />} />
                             <Route path='/Dialogs' element={ < DialogContainer />} />
                             <Route path='/Profile' element={<ProfileContainer />} />
                             <Route path='/Profile/:id' element={<ProfileContainer />} />
                             <Route path='/News' element={<News />} />
-                            <Route path='/Music' element={<Music />} />
                             <Route path='/Settings' element={<Settings />} />
                             <Route path='/Users' element={<UsersContainer />} />
                             <Route path='/Login/*' element={ <LoginContainer />} />
