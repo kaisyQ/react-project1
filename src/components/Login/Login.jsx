@@ -25,7 +25,7 @@ let LoginForm = (props) => {
                 </div>
             </div>
         </div>
-        <button>Log in</button>
+        <button className="btn">Log in</button>
     </form>
 }
 LoginForm = reduxForm({form: 'loginForm'})(LoginForm)

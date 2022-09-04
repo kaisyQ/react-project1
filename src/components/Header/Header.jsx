@@ -1,7 +1,7 @@
 import React from "react"
 import { NavLink } from "react-router-dom"
 
-import css from './Header.module.css'
+import css from './Header.module.scss'
 
 const Header = (props) => {
     const logoutBtnClick = () => {
@@ -10,18 +10,22 @@ const Header = (props) => {
 
     return (
         <header className={css.header}>
-            <img src="./logo.png" alt=""/>
-            <h1>Social Network</h1>
+            <div className={css.headerLogo}>
+                <img src="./logo.png" alt="logo"/>
+                <span>Company Logo</span>
+            </div>
             {
                 props.isAuth 
-                ?   <div>
+                ?   <div className={css.logout}>
                         <span>{props.login}</span>
                         <div>
                             <button onClick={logoutBtnClick}>Log out</button>
                         </div>
                     </div>
                 :
-                    <NavLink to='/Login'>Log in</NavLink>
+                    <button className="btn">
+                        <NavLink to='/Login'>Log in</NavLink>
+                    </button>
             }
         </header>
     )

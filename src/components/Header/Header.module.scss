@@ -1,0 +1,28 @@
+.header {
+    padding: 0 50px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    grid-area: header;
+    background-color: #fff;
+}
+
+.headerLogo{
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    cursor: pointer;
+
+    font-weight: 300;
+
+    img {
+        height: 100%; 
+    }
+
+    span {
+        text-transform: capitalize;
+    }
+}
