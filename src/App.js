@@ -33,13 +33,13 @@ class App extends React.Component {
                     <div className='app-wrapper-content'>
                         <Routes>
                             <Route path='/' element={ <News />} />
-                            <Route path='/Dialogs' element={ < DialogContainer />} />
-                            <Route path='/Profile' element={<ProfileContainer />} />
-                            <Route path='/Profile/:id' element={<ProfileContainer />} />
-                            <Route path='/News' element={<News />} />
-                            <Route path='/Settings' element={<Settings />} />
-                            <Route path='/Users' element={<UsersContainer />} />
-                            <Route path='/Login/*' element={ <LoginContainer />} />
+                            <Route path='/Dialogs' element={ < DialogContainer /> } />
+                            <Route path='/Profile' element={ <ProfileContainer />} />
+                            <Route path='/Profile/:id' element={ <ProfileContainer /> } />
+                            <Route path='/News' element={ <News /> } />
+                            <Route path='/Settings' element={ <Settings /> } />
+                            <Route path='/Users' element={ <UsersContainer /> } />
+                            <Route path='/Login/*' element={ <LoginContainer /> } />
                         </Routes>
                     </div>
                 </div>

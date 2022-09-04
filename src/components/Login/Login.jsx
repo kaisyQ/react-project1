@@ -5,14 +5,25 @@ import css from './Login.module.scss'
 
 let LoginForm = (props) => {
     return <form className={css.loginForm} onSubmit={props.handleSubmit}>
-        <div>
-            <Field placeholder="Enter your email" className={css.inputField} type="text" component='input' name='email'/> <span>Login</span>
-        </div> 
-        <div>
-            <Field placeholder="Enter your password" className={css.inputField} type="password" component='input' name='password'/> <span>Password</span>
-        </div>
-        <div>
-            <Field className={css.checkBoxField} type="checkbox" component='input' name='rememberMe'/> <span>Remember me</span>
+        <div className={css.loginFormItems}>
+            <div className={css.loginFormItem}>
+                <label htmlFor="email">Email</label>
+                <Field id="email" placeholder="Enter your email" className={css.inputField} type="text" component='input' name='email'/> 
+            </div> 
+            <div className={css.loginFormItem}>
+                <label htmlFor="password">Password</label>
+                <Field id="password" placeholder="Enter your password" className={css.inputField} type="password" component='input' name='password'/>
+            </div>
+            <div className={css.loginFormItem}>
+                <label htmlFor="repeat-password">Repeat Password</label>
+                <Field id="repeat-password" placeholder="Repeat your password" className={css.inputField} type="password" component='input' name='password'/>
+            </div>
+            <div className={css.loginFormItem}>
+                <div className={css.checkbox}>
+                    <label htmlFor="rememberMe">Remember me</label>
+                    <Field id="rememberMe" className={css.checkBoxField} type="checkbox" component='input' name='rememberMe'/>
+                </div>
+            </div>
         </div>
         <button>Log in</button>
     </form>
@@ -30,15 +41,9 @@ const Login = (props) => {
     }
 
     return  <>
-        <div className={css.loginHeader}>
-            <h1>Log in</h1>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                Ipsa earum et veritatis ducimus quo perferendis asperior
-                es corporis aliquid. Facilis fugit sint hic excepturi, molestias architecto voluptatem nemo assumenda cum qui!       
-            </p>    
+        <div className={css.loginFormContainer}>
+            <LoginForm onSubmit={submitLoginForm}/>
         </div>
-        <LoginForm onSubmit={submitLoginForm}/>
     </>
 }
 

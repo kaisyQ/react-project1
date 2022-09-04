@@ -1,10 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,400&display=swap');
+
+input, button {
+    outline: 0;
+    border: 0;
+    
+    background-color: #fff;
+
+    font: inherit;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
 }
 
 body {
-    background-color: #000;
+    background-color: rgb(238, 238, 238);
+
+    font-family: 'Roboto', sans-serif, monospace;
+    font-size: 24px;
+    font-weight: 400;
 }
 
 .app-wrapper {
@@ -16,11 +31,9 @@ body {
 
     grid-template-rows: 80px 1fr;
     grid-template-columns: 2fr 10fr;
-    grid-gap: 10px;
+    grid-gap: 30px;
 
-    font-size: 24px;
-
-    width: 1200px;
+    max-width: 1200px;
     height: 100vh;
     margin: 0 auto;
 }
