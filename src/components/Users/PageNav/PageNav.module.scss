@@ -1,11 +1,13 @@
 .pageNav {
     padding-top: 30px;
-    width: 600px;
     margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-}
-
-.pageNav > div {
-    cursor: pointer;
+    border-spacing: 10px 10px;
+    td {
+        text-align: center;
+        font-size: 15px;
+        max-width: 90px;
+        overflow: hidden;
+        cursor: pointer;
+    }
+   
 }

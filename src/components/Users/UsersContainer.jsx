@@ -1,9 +1,6 @@
 import React from "react"
-
 import { connect } from "react-redux"
-
 import { usersActionCreater, getUsers, getUserAtNumPage, makeUserFollowed, makeUserUnfollowed } from "../../redux/users-reducer"
-
 import Users from "./Users"
 
 class UsersAPIContainer extends React.Component {

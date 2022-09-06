@@ -1,5 +1,6 @@
 import React from "react"
 import styles from './PageNav.module.scss'
+import Button from './../../Common/Button/Button'
 import { makeNavArr } from "./pageN-generate"
 
 const PageNav = ({currentPage, totalCount, pageCount, changeCurrentPage, getUsersToShow}) => {
@@ -8,12 +9,16 @@ const PageNav = ({currentPage, totalCount, pageCount, changeCurrentPage, getUser
         getUsersToShow(pageIndx)
     }
     return <>
-        <div className={styles.pageNav}>
-            {
-                makeNavArr(currentPage, Math.ceil(totalCount / pageCount ))
-                .map((num, index) => <div onClick={() => onPageNumberClick(num)} key={index}>{num}</div>)
-            }
-        </div>
+        <table className={styles.pageNav}>
+            <tr>
+                {
+                    makeNavArr(currentPage, Math.ceil(totalCount / pageCount ))
+                    .map((num, index) => <td 
+                        onClick={() => onPageNumberClick(num)}
+                        key={index}><Button padding={'15px 20px'}>{num}</Button></td>)
+                }
+            </tr>
+        </table>
     </>
 }
 

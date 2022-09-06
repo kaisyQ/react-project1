@@ -32,12 +32,10 @@ const User = props => {
                     <td className={css.userBnts}>
                         { props.user.followed ? 
                             <Button
-                                className="btn" 
                                 disabled={props.userInFollowingProcess.find((userId) => userId === props.user.id)} 
                                 onClick={ () => onUnFollow(props.user.id) }
                             >Unfollow</Button> :
                             <Button
-                                className="btn" 
                                 disabled={props.userInFollowingProcess.find((userId) => userId === props.user.id)} 
                                 onClick={ () => onFollow(props.user.id) }
                             >Follow</Button>

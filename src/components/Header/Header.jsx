@@ -20,11 +20,11 @@ const Header = (props) => {
                 ?   <div className={css.logout}>
                         <h4>{props.login}</h4>
                         <div>
-                            <Button className="btn" onClick={logoutBtnClick}>Log out</Button>
+                            <Button onClick={logoutBtnClick}>Log out</Button>
                         </div>
                     </div>
                 :
-                    <Button className="btn">
+                    <Button>
                         <NavLink to='/Login'>Log in</NavLink>
                     </Button>
             }
