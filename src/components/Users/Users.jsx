@@ -3,25 +3,21 @@ import Preloader from '../Common/Preloader/Preloader'
 
 import css from './Users.module.scss'
 
-import { makeNavArr } from './PageNav/pageN-generate'
-
 import User from './User/User'
+import PageNav from './PageNav/PageNav'
 
 const Users = (props) => {
-    const onPageNumberClick = (spanIndex) => {
-        props.changeCurrentPage(spanIndex)
-        props.getUsersToShow(spanIndex)
-    }
-    let tempArrOfPageNumbers = makeNavArr(props.currentPage, Math.ceil( props.totalCount / props.pageCount ))
-    return (
+    return <>
         <div className='users-wrapper'>
             { props.isFetching ? <Preloader/> : null }
 
-            <div className={css.userNav}>
-            {   
-                tempArrOfPageNumbers.map((num, index) => <div onClick={() => onPageNumberClick(num)} key={ index }> {num} </div>)
-            }
-            </div>
+            <PageNav 
+                changeCurrentPage={props.changeCurrentPage}
+                getUsersToShow={props.getUsersToShow}
+                currentPage={props.currentPage}
+                totalCount={props.totalCount}
+                pageCount={props.pageCount}
+            />
             <div className='users'>
                 { props.usersToShow.map(user => 
                     <User 
@@ -38,7 +34,7 @@ const Users = (props) => {
                 }
             </div>
         </div>
-    )
+    </>
 }
 
 
