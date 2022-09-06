@@ -9,8 +9,7 @@ import PageNav from './PageNav/PageNav'
 const Users = (props) => {
     return <>
         <div className='users-wrapper'>
-            { props.isFetching ? <Preloader/> : null }
-
+            { props.isFetching && <Preloader/> }
             <PageNav 
                 changeCurrentPage={props.changeCurrentPage}
                 getUsersToShow={props.getUsersToShow}
@@ -29,8 +28,7 @@ const Users = (props) => {
                         follow={props.follow}
                         makeUserFollowed={props.makeUserFollowed}
                         makeUserUnfollowed={props.makeUserUnfollowed}
-                    />
-                 )
+                    />)
                 }
             </div>
         </div>

@@ -11,7 +11,7 @@ const PageNav = ({currentPage, totalCount, pageCount, changeCurrentPage, getUser
         <div className={styles.pageNav}>
             {
                 makeNavArr(currentPage, Math.ceil(totalCount / pageCount ))
-                .map((num, index) => <div onClick={() => onPageNumberClick(num)} key={ index }> {num} </div>)
+                .map((num, index) => <div onClick={() => onPageNumberClick(num)} key={index}>{num}</div>)
             }
         </div>
     </>
