@@ -1,0 +1,53 @@
+.user {
+    width: 800px;
+    margin: 40px auto;
+    
+    padding: 20px 60px;
+
+    border: 2px solid rgb(70, 108, 192);
+    border-radius: 7px;
+}
+
+.userAvatar {
+    text-align: center;
+    width: 150px;
+
+    p {
+        overflow: hidden;
+        font: inherit;
+        font-weight: 400;
+        font-size: 22px;
+        text-decoration: underline;
+        max-width: 150px;
+    }
+}
+.userStatus {
+    margin: 0 30px;
+
+    width: 300px;
+
+    font: inherit;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 20px;
+}
+
+.avatar img{
+    max-width: 80px;
+}
+
+.userBnts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    button {
+        max-width: 200px;
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+}
+
+.t {
+    background-color: aqua;
+}

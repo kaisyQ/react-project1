@@ -2,6 +2,7 @@ import React from "react"
 import { NavLink } from "react-router-dom"
 
 import css from './Header.module.scss'
+import Button from './../Common/Button/Button'
 
 const Header = (props) => {
     const logoutBtnClick = () => {
@@ -17,15 +18,15 @@ const Header = (props) => {
             {
                 props.isAuth 
                 ?   <div className={css.logout}>
-                        <span>{props.login}</span>
+                        <h4>{props.login}</h4>
                         <div>
-                            <button onClick={logoutBtnClick}>Log out</button>
+                            <Button className="btn" onClick={logoutBtnClick}>Log out</Button>
                         </div>
                     </div>
                 :
-                    <button className="btn">
+                    <Button className="btn">
                         <NavLink to='/Login'>Log in</NavLink>
-                    </button>
+                    </Button>
             }
         </header>
     )

@@ -26,3 +26,14 @@
         text-transform: capitalize;
     }
 }
+
+.logout {
+    display: flex;
+    align-items: center;
+
+    h4 {
+        margin-right: 20px;
+        font-weight: 400;
+        font-style: italic;
+    }
+}

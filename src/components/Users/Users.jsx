@@ -1,9 +1,9 @@
 import React from 'react'
 import Preloader from '../Common/Preloader/Preloader'
 
-import css from './Users.module.css'
+import css from './Users.module.scss'
 
-import { makeNavArr } from './UsersTEMP'
+import { makeNavArr } from './PageNav/pageN-generate'
 
 import User from './User/User'
 
@@ -12,7 +12,6 @@ const Users = (props) => {
         props.changeCurrentPage(spanIndex)
         props.getUsersToShow(spanIndex)
     }
-
     let tempArrOfPageNumbers = makeNavArr(props.currentPage, Math.ceil( props.totalCount / props.pageCount ))
     return (
         <div className='users-wrapper'>

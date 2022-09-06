@@ -1,9 +1,10 @@
 import React from "react"
 
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
-import css from './User.module.css'
+import css from './User.module.scss'
 import defaultUserImage from '../../../Images/User.png'
+import Button from './../../Common/Button/Button'
 
 const User = props => {
 
@@ -16,29 +17,36 @@ const User = props => {
     }
 
     return (
-        <div className={css.container}>
-            <div className={css.item}>
-                <div className={css.itemInfo}>
-                    <NavLink to={`/Profile/${props.user.id}`}>
-                        <img src={ props.user.photos.large ? props.user.photos.large : defaultUserImage} alt=""/>
-                    </NavLink>
-                    <div>{ props.user.name }</div>
-                    <div>
+        <>
+            <table className={css.user}>
+                <tr>
+                    <td className={css.userAvatar}>
+                        <NavLink to={`/Profile/${props.user.id}`}>
+                            <div className={css.avatar}>
+                                <img src={ props.user.photos.large ? props.user.photos.large : defaultUserImage} alt=""/>
+                            </div>
+                        </NavLink>
+                        <p className={css.userName}>{ props.user.name }</p>
+                    </td>
+                    <td className={css.userStatus}>Im using this social network</td>
+                    <td className={css.userBnts}>
                         { props.user.followed ? 
-                            <button
+                            <Button
+                                className="btn" 
                                 disabled={props.userInFollowingProcess.find((userId) => userId === props.user.id)} 
                                 onClick={ () => onUnFollow(props.user.id) }
-                            >Unfollow</button> :
-                            <button 
+                            >Unfollow</Button> :
+                            <Button
+                                className="btn" 
                                 disabled={props.userInFollowingProcess.find((userId) => userId === props.user.id)} 
                                 onClick={ () => onFollow(props.user.id) }
-                            >Follow</button>
+                            >Follow</Button>
                         }
-                    </div>
-                </div>
-                <div className={css.itemStatus}>Im using this social network</div>
-            </div>
-        </div>
+                        <Button>Write message</Button>
+                    </td>
+                </tr>
+            </table>
+        </>
     )
 }
 

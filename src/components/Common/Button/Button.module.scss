@@ -1,0 +1,22 @@
+.btn {
+    padding: 10px 40px;
+    border: 1px solid rgb(49, 136, 207);
+    border-radius: 5px;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 300;
+
+    a {
+        color: #000;
+    }
+}
+
+.btn:hover {
+    transition: .4s;
+    background-color: rgb(207, 49, 128);
+    color: #fff;
+    border-color: #000;
+    a {
+        color: #fff;
+    }
+}
