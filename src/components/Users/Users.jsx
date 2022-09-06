@@ -1,8 +1,6 @@
 import React from 'react'
 import Preloader from '../Common/Preloader/Preloader'
 
-import css from './Users.module.scss'
-
 import User from './User/User'
 import PageNav from './PageNav/PageNav'
 

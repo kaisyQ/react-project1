@@ -1,9 +1,9 @@
 import React from "react"
-import css from './Profile.module.scss'
+import styles from './ProfileInformation.module.scss'
 
 import ProfileAbout from "./ProfileAbout/ProfileAbout"
-import ProfileImage from "./ProfileImage/ProfileImage"
 import ProfileStatus from "./ProfileStatus/ProfileStatus"
+import userImage from './../../../Images/User.png'
 
 class ProfileInformation extends React.Component {
     constructor(props) {
@@ -38,28 +38,32 @@ class ProfileInformation extends React.Component {
     }
 
     render = () => {
-        return (
-            <div className="userAboutContainer">
+        return <>
+            <div className={styles.userAboutContainer}>
         
-                <ProfileImage largePhoto={this.props.profileInfo.photos.large} />
-
-                <ProfileStatus 
-                    onStatusDoubleClick={this.onStatusDoubleClick}
-                    onStatusChange={this.onStatusChange}
-                    onBlurInput={this.onBlurInput}
-                    status={this.state.status}
-                    statusOnFocus={this.state.statusOnFocus}
-                />
-
-                <ProfileAbout 
-                    fullName={this.props.profileInfo.fullName}
-                    aboutMe={this.props.profileInfo.aboutMe}
-                    lookingForAJobDescription={this.props.profileInfo.lookingForAJobDescription}
-                    vk={this.props.profileInfo.contacts.vk}
-                />
+                <div className={styles.userImage}>
+                    <img src={this.props.largePhoto || userImage} alt="avatar" />
+                </div>
+                
+                <div className={styles.userAbout}>
+                    <h2>{this.props.profileInfo.fullName}</h2>
+                    <ProfileStatus 
+                        onStatusDoubleClick={this.onStatusDoubleClick}
+                        onStatusChange={this.onStatusChange}
+                        onBlurInput={this.onBlurInput}
+                        status={this.state.status}
+                        statusOnFocus={this.state.statusOnFocus}
+                    />
+                    <hr />
+                    <ProfileAbout 
+                        aboutMe={this.props.profileInfo.aboutMe}
+                        lookingForAJobDescription={this.props.profileInfo.lookingForAJobDescription}
+                        vk={this.props.profileInfo.contacts.vk}
+                    />
+                </div>  
 
         </div>
-    )
+    </>
     }
 }
 

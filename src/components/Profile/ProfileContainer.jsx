@@ -42,7 +42,5 @@ const WithRouterProfileContainer = (props) => {
     </>
 }
 
-const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(WithRouterProfileContainer)
-
-export default ProfileContainer
+export default connect(mapStateToProps, mapDispatchToProps)(WithRouterProfileContainer)
 

@@ -1,5 +1,5 @@
 import React  from "react"
-import css from './Posts.module.css'
+import css from './Posts.module.scss'
 import { Field, reduxForm } from "redux-form"
 import Post from './Post/Post'
 

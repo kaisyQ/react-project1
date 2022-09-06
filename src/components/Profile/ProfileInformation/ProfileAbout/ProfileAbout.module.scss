@@ -1,0 +1,32 @@
+.profileAbout {
+    margin-top: 10px;
+    font-size: 17px;
+}
+
+.aboutItem {
+    margin: 10px 0;
+}
+
+.profileLnkNav {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.withDwnArrow::after {
+    margin-left: 10px;
+    content: '\25B2';
+}
+
+.withUpArrow::after {
+    margin-left: 10px;
+    content: '\25BC';
+}
+
+.profileLinks {
+    font-size: 26px;
+    margin: 14px;
+    display: flex;
+}
+.linkIcon {
+    margin: 0 30px
+}
