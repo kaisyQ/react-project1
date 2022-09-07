@@ -14,7 +14,7 @@ import appReducer from './app-reducer'
 let reducers = combineReducers( {
         dialogsPageData: dialogsReducer,
         postPageData: profileReducer,
-        usersPageData: usersReducer,
+        users: usersReducer,
         auth: authReducer,
         app: appReducer,
         form: formReducer

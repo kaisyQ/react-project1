@@ -5,6 +5,7 @@ import User from './User/User'
 import PageNav from './PageNav/PageNav'
 
 const Users = (props) => {
+    debugger
     return <>
         <div className='users-wrapper'>
             { props.isFetching && <Preloader/> }

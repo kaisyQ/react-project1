@@ -1,5 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
+import { getCurrentPage, getIsFetching, getPageCount, getTotalCount, getUserInFollowingProcess, getUsersToShow } from "../../redux/selectors/users-selector"
 import { usersActionCreater, getUsers, getUserAtNumPage, makeUserFollowed, makeUserUnfollowed } from "../../redux/users-reducer"
 import Users from "./Users"
 
@@ -10,19 +11,14 @@ class UsersAPIContainer extends React.Component {
     }
     
     getUsersToShow = (num) => {
-        this.props.getUserAtNumPage(num, this.props.usersPageData.pageCount)
+        this.props.getUserAtNumPage(num, this.props.data.pageCount)
     }
 
 
     render () {
         return (
             <Users 
-                currentPage={this.props.usersPageData.currentPage}
-                usersToShow={this.props.usersPageData.usersToShow}
-                totalCount={this.props.usersPageData.totalCount}
-                pageCount={this.props.usersPageData.pageCount}
-                isFetching={this.props.usersPageData.isFetching}
-                userInFollowingProcess={this.props.usersPageData.userInFollowingProcess}
+                {...this.props.data}
 
                 getUsersToShow={this.getUsersToShow}
                 changeCurrentPage={this.props.changeCurrentPage}
@@ -37,7 +33,14 @@ class UsersAPIContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        usersPageData: state.usersPageData
+        data : {
+            currentPage: getCurrentPage(state),
+            usersToShow: getUsersToShow(state),
+            totalCount: getTotalCount(state),
+            pageCount: getPageCount(state),
+            isFetching: getIsFetching(state),
+            userInFollowingProcess: getUserInFollowingProcess(state)
+        }
     }
 }
 
@@ -53,6 +56,4 @@ let mapDispatchToProps = {
 }
 
 
-let UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIContainer)
-
-export default UsersContainer
+export default connect(mapStateToProps, mapDispatchToProps)(UsersAPIContainer)
