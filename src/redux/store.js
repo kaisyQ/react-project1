@@ -24,5 +24,3 @@ let reducers = combineReducers( {
 let store = createStore( reducers, applyMiddleware(thunk) )
 
 export default store
-
-window.store = store

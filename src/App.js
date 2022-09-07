@@ -48,15 +48,9 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        isFetching: state.app.isFetching
-    }
-}
+const mapStateToProps = (state) => ({ isFetching: state.app.isFetching })
 
-const mapDispatchToProps = {
-    appIsAuthThnk
-}
+const mapDispatchToProps = { appIsAuthThnk }
 
 const AppContainer = connect(mapStateToProps, mapDispatchToProps) (App)
 
