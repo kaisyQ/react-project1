@@ -1,29 +1,49 @@
-.Posts {
-    width: 700px;
+.posts {
+    margin-left: 20px;
 }
 
-.Posts > h3 {
-    width: 220px;
-    margin: 20px auto;
-    color: antiquewhite;
+.newPost {
+    max-width: 400px;
+    background-color: #fff;
+    padding: 15px 15px 5px 15px;
+    border-radius: 5px;
+
+    h4 {
+        text-decoration: underline;
+        font-weight: 400;
+    }
+
+    button {
+        margin-top: 5px;
+        text-transform: capitalize;
+    }
+
+    textarea {
+        width: 100%;
+        min-height: 70px;
+        margin: 5px;
+        padding: 10px;
+        border: 1px solid rgb(144, 145, 144);
+        border-radius: 5px;
+        font-weight: 300;
+        font-size: 14px;
+    }
 }
 
-.Posts > textarea {
-    display: block;
-    margin: 0 auto;
-    width: 300px;
-    height: 100px;
-    font-size: 16px;
-    border: 0;
+.createFormBtn {
+   text-align: right;
 }
 
-.Posts > .createButton {
-    display: block;
-    width: 150px;
-    border: 0;
-    margin: 35px auto;
-}
+.allPosts {
+    max-width: 400px;
+    background-color: #fff;
+    padding: 15px 15px 5px 15px;
+    margin-top: 30px;
+    border-radius: 5px;
 
-.Posts > .createButton:hover {
-    cursor: pointer;
+    h4 {
+        font-weight: 300;
+        text-decoration: underline;
+        margin-bottom: 25px;
+    }
 }

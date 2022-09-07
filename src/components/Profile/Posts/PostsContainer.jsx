@@ -7,6 +7,4 @@ import Posts from "./Posts"
 const mapStateToProps = (state) => { return { postPageData: state.postPageData } }
 const mapDispatchToProps = { createNewPost: createNewPostActionCreater }
 
-const PostsContainer = connect(mapStateToProps, mapDispatchToProps)(Posts)
-
-export default PostsContainer
+export default connect(mapStateToProps, mapDispatchToProps)(Posts)

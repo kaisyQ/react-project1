@@ -11,7 +11,7 @@ const Profile = (props) => {
         return <>
             <div className={styles.container}>
                 <ProfileInformation {...props} />
-                <PostsContainer />
+                <PostsContainer photo={props.largePhoto} />
             </div>
         </> 
     }

@@ -18,7 +18,8 @@ const ProfileAbout = (props) => {
                 }
                 <p 
                     className={`${styles.profileLnkNav} ${showLnk ? styles.withDwnArrow : styles.withUpArrow}`}
-                    onClick={() => {setShowLnk(showLnk => !showLnk)}}>Show Links 
+                    onClick={() => {setShowLnk(showLnk => !showLnk)}}>
+                        {!showLnk ? 'Show Links' : 'Hide Links'} 
                 </p>
                 {
                     showLnk && <div
