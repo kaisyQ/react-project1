@@ -1,21 +1,16 @@
 import { connect } from "react-redux"
 
 import { logout } from '../../redux/auth-reducer'
+import { getIsAuth, getLogin } from "../../redux/selectors/app-selector"
 
 import Header from "./Header"
 
-const mapStateToProps = (state) => {
-    return {
-        isAuth: state.app.isAuth, 
-        email: state.app.email,
-        login: state.app.login
-    }
-}
-const mapDispatchToProps = {
-    logout
-}
+const mapStateToProps = (state) => ({
+    isAuth: getIsAuth(state), 
+    login: getLogin(state)
+})
 
-let HeaderContainer = connect(mapStateToProps, mapDispatchToProps)(Header)
+const mapDispatchToProps = { logout }
 
-export default HeaderContainer
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
 

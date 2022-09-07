@@ -1,6 +1,7 @@
 import React from "react"
 import { Field, reduxForm } from "redux-form"
 import { Navigate  } from 'react-router-dom'
+import Button from "../Common/Button/Button"
 import css from './Login.module.scss'
 
 let LoginForm = (props) => {
@@ -16,7 +17,7 @@ let LoginForm = (props) => {
             </div>
             <div className={css.loginFormItem}>
                 <label htmlFor="repeat-password">Repeat Password</label>
-                <Field id="repeat-password" placeholder="Repeat your password" className={css.inputField} type="password" component='input' name='password'/>
+                <Field id="repeat-password" placeholder="Repeat your password" className={css.inputField} type="password" component='input' name='repeat-password'/>
             </div>
             <div className={css.loginFormItem}>
                 <div className={css.checkbox}>
@@ -25,7 +26,7 @@ let LoginForm = (props) => {
                 </div>
             </div>
         </div>
-        <button className="btn">Log in</button>
+        <Button>Log in</Button>
     </form>
 }
 LoginForm = reduxForm({form: 'loginForm'})(LoginForm)

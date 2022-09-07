@@ -21,9 +21,8 @@ CreatePostForm = reduxForm ({ form:'createPostForm'}) (CreatePostForm)
 const Posts = (props) => {
 
     const createNewPost = (values) => {
-        props.createNewPost(values.createNewPostTextarea)
+        if (Object.keys(values).length) props.createNewPost(values.createNewPostTextarea)
     }
-
     return <>
         <div className={styles.postsContainer}>
             <div className={styles.posts}>
