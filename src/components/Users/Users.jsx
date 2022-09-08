@@ -5,7 +5,6 @@ import User from './User/User'
 import PageNav from './PageNav/PageNav'
 
 const Users = (props) => {
-    debugger
     return <>
         <div className='users-wrapper'>
             { props.isFetching && <Preloader/> }
@@ -22,8 +21,6 @@ const Users = (props) => {
                         key={user.id} 
                         user={user} 
                         userInFollowingProcess={props.userInFollowingProcess}
-                        deleteUserInFollowArr={props.deleteUserInFollowArr}
-                        pushUserToFollowArr={props.pushUserToFollowArr} 
                         follow={props.follow}
                         makeUserFollowed={props.makeUserFollowed}
                         makeUserUnfollowed={props.makeUserUnfollowed}

@@ -95,23 +95,25 @@ export const getUserAtNumPage = (page, count) => (dispatch) => {
 }
 
 export const makeUserFollowed = (id) => (dispatch) => {
+    debugger
     dispatch(usersActionCreater.pushUserToFollowArr(id))
-        followAPI.followUser(id).then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(usersActionCreater.deleteUserInFollowArr(id)) 
-                dispatch(usersActionCreater.follow(id))  
-            } 
-        })
+    followAPI.followUser(id).then(response => {
+        debugger
+        if (response.data.resultCode === 0) {
+            dispatch(usersActionCreater.deleteUserInFollowArr(id)) 
+            dispatch(usersActionCreater.follow(id))  
+        } 
+    })
 }
 
 export const makeUserUnfollowed = (id) => (dispatch) => {
     dispatch(usersActionCreater.pushUserToFollowArr(id))
-        followAPI.unfollowUser(id).then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(usersActionCreater.deleteUserInFollowArr(id)) 
-                dispatch(usersActionCreater.follow(id))  
-            } 
-        })
+    followAPI.unfollowUser(id).then(response => {
+        if (response.data.resultCode === 0) {
+            dispatch(usersActionCreater.deleteUserInFollowArr(id)) 
+            dispatch(usersActionCreater.follow(id))  
+        } 
+    })
 }
 
 

@@ -10,14 +10,16 @@ const PageNav = ({currentPage, totalCount, pageCount, changeCurrentPage, getUser
     }
     return <>
         <table className={styles.pageNav}>
-            <tr>
-                {
-                    makeNavArr(currentPage, Math.ceil(totalCount / pageCount ))
-                    .map((num, index) => <td 
-                        onClick={() => onPageNumberClick(num)}
-                        key={index}><Button padding={'15px 20px'}>{num}</Button></td>)
-                }
-            </tr>
+            <tbody>
+                <tr>
+                    {
+                        makeNavArr(currentPage, Math.ceil(totalCount / pageCount ))
+                        .map((num, index) => <td 
+                            onClick={() => onPageNumberClick(num)}
+                            key={index}><Button padding={'15px 20px'}>{num}</Button></td>)
+                    }
+                </tr>
+            </tbody>
         </table>
     </>
 }

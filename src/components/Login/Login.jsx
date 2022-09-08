@@ -35,7 +35,6 @@ const Login = ({ isAuth, login }) => {
 
     if (isAuth) return <Navigate to='/Profile' /> 
     
-
     const submitLoginForm = (values) => {
         login(values.email, values.password, values.rememberMe)
     }

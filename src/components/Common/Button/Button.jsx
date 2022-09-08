@@ -1,10 +1,9 @@
 import React from "react"
 import styles from './Button.module.scss'
 
-const Button = ({ children, padding }) => {
-    
+const Button = ({ children, onClick, padding }) => {
     return <>
-        <button style={{ padding }} className={styles.btn}>{ children }</button>
+        <button onClick={onClick} style={{ padding }} className={styles.btn}>{ children }</button>
     </>    
 }
 
