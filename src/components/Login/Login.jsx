@@ -1,34 +1,12 @@
 import React from "react"
 import { Navigate  } from 'react-router-dom'
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import Button from "../Common/Button/Button"
 import styles from './Login.module.scss'
-import { useFormik } from 'formik';
  
 const Login = ({ isAuth, login }) => {
   
-    const validate = values => {
-        const errors = {}
-        if (!values.email) {
-            errors.email = 'Required';
-        } else if (values.email.length > 20) {
-            errors.email = 'Must be 15 characters or less';
-        }
-
-        if (!values.password) {
-            errors.password = 'Required';
-        } else if (values.password.length < 8) {
-            errors.password = 'Must be more than 8 characters';
-        }
-
-        if (!values.repeatPassword) {
-            errors.repeatPassword = 'Required';
-        } else if (values.repeatPassword !== values.password) {
-            errors.repeatPassword = 'Passwords are not equal';
-        }
-        return errors
-    }
-    
-
     const loginFormik = useFormik({
         initialValues: {
             email: '',
@@ -37,7 +15,11 @@ const Login = ({ isAuth, login }) => {
             rememberMe: false
 
         },
-        validate,
+        validationSchema: Yup.object({
+            email: Yup.string().email('Invalid email address').max(20,'Must be 15 characters or less').required('Required'),
+            password: Yup.string().min(8, 'Must be more than 8 characters').max(35, 'Must be 35 characters or less').required('Required'),
+            repeatPassword: Yup.string().oneOf([Yup.ref('password'), null], "Does not match with Password!")
+        }),
         onSubmit: (values) => {
             login(values.email, values.password, values.rememberMe)
         }
