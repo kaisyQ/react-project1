@@ -47,7 +47,6 @@ export const login = (email, password, rememberMe) => (dispatch) => {
         if (response.data.resultCode === 0) {
             authAPI.checkAuthMe().then(response => {
                 dispatch(isAuthActionCreater(true, response.data))
-                dispatch()
             })
         }
     })
