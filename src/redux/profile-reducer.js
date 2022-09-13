@@ -6,14 +6,15 @@ const SET_PROFILE_STATUS = 'SET-PROFILE-STATUS'
 const UPDATE_STATUS = 'UPDATE-STATUS'
 
 const defaultStateValue = {
-    posts: ['This is my first post', 'Hello, im fine ! :) '],
+    posts: ['first post', 'second post'],
     profile: null,
     status: ''
 } 
 
-
 const profileReducer = (state=defaultStateValue, action) => {
-    switch (action.type) {
+    const { type } = action
+
+    switch (type) {
         case ADD_POST:
             return {
                 ...state,
@@ -39,23 +40,10 @@ const profileReducer = (state=defaultStateValue, action) => {
     }
 }
 
-export const createNewPostActionCreater = (text) => { return { type: ADD_POST, text } }
-
-export const setProfileActionCreater = (profile) => {
-    return {
-        type: SET_PROFILE,
-        profile: profile
-    }
-}
-export const setProfileStatusActionCreater = (status) => {
-    return {
-        type: SET_PROFILE_STATUS,
-        status: status
-    }
-}
-export const updateStatusActionCreater = (newStatus) => {
-    return { type: UPDATE_STATUS, newStatus}
-}
+export const createNewPost = (text) => ({ type: ADD_POST, text })
+export const setProfile = (profile) => ({ type: SET_PROFILE, profile })
+export const setProfileStatus = (status) => ({ type: SET_PROFILE_STATUS, status })
+export const updateStatus = (newStatus) => ({ type: UPDATE_STATUS, newStatus})
 
 
 export const setProfileThunk = (userId) => (dispatch) => {
@@ -63,7 +51,7 @@ export const setProfileThunk = (userId) => (dispatch) => {
         authAPI.checkAuthMe().then(response => {
             if (response.data.resultCode === 0) {
                 profileAPI.getProfile(response.data.data.id).then(response => {
-                    dispatch(setProfileActionCreater(response.data))
+                    dispatch(setProfile(response.data))
                 })
             } else {
                 console.error('err')
@@ -71,7 +59,7 @@ export const setProfileThunk = (userId) => (dispatch) => {
         })
     } else {
         profileAPI.getProfile(userId).then(response => {
-            dispatch(setProfileActionCreater(response.data))
+            dispatch(setProfile(response.data))
         })
     }
 }
@@ -81,7 +69,7 @@ export const setProfileStatusThunk = (userId) => (dispatch) => {
         authAPI.checkAuthMe().then(response => {
             if (response.data.resultCode === 0) {
                 profileAPI.getUserStatus(response.data.data.id).then(response => {
-                    dispatch(setProfileStatusActionCreater(response.data))
+                    dispatch(setProfileStatus(response.data))
                 }) 
             } else {
                 console.error('err')
@@ -89,13 +77,13 @@ export const setProfileStatusThunk = (userId) => (dispatch) => {
         })
     } else {
         profileAPI.getUserStatus(userId).then(response => {
-            dispatch(setProfileStatusActionCreater(response.data))
+            dispatch(setProfileStatus(response.data))
         }) 
     }
 }
 
 export const updateCurrentUserProfileStatus = (status) => (dispatch) => {
-    profileAPI.putMyStatus(status).then (response => {
+    profileAPI.putMyStatus(status).then(response => {
         if (response.resultCode === 0) {
             dispatch(updateCurrentUserProfileStatus(status))
         }

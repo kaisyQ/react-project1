@@ -11,9 +11,9 @@ import usersReducer from './users-reducer'
 import appReducer from './app-reducer'
 
 
-let reducers = combineReducers( {
+const reducers = combineReducers( {
         dialogsPageData: dialogsReducer,
-        postPageData: profileReducer,
+        profile: profileReducer,
         users: usersReducer,
         auth: authReducer,
         app: appReducer,

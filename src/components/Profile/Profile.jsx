@@ -5,13 +5,13 @@ import PostsContainer from './Posts/PostsContainer'
 import ProfileInformation from './ProfileInformation/ProfileInformation'
 
 const Profile = (props) => {
-    if (!props.profileInfo){
+    if (!props.profile){
         return <></>
     } else {
         return <>
             <div className={styles.container}>
                 <ProfileInformation {...props} />
-                <PostsContainer photo={props.largePhoto} />
+                <PostsContainer photo={props.profile.largePhoto} />
             </div>
         </> 
     }

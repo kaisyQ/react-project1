@@ -1,46 +1,31 @@
-import React from "react"
-
+import React, { useEffect } from "react"
 import { connect } from "react-redux"
 import { useParams } from "react-router-dom"
-
+import { setProfileThunk, setProfileStatusThunk, updateCurrentUserProfileStatus } from './../../redux/profile-reducer'
+import { getProfile, getStatus } from './../../redux/selectors/profile-selector'
 import Profile from "./Profile"
 
-import { setProfileThunk, setProfileStatusThunk, updateCurrentUserProfileStatus } from './../../redux/profile-reducer'
-
-class ProfileAPIContainer extends React.Component {
-
-    componentDidMount () {
-        this.props.setProfileThunk(this.props.userId)
-        this.props.setProfileStatusThunk(this.props.userId)
-    }
-
-    render () {
-        return  <Profile updateCurrentUserProfileStatus={this.props.updateCurrentUserProfileStatus}
-                    profileInfo={this.props.profile} 
-                    status={this.props.status}
-                />
-    }
-}
-
-const mapStateToProps = (state) => {
-    return {
-        profile: state.postPageData.profile,
-        status: state.postPageData.status
-    }
-}
-
-const mapDispatchToProps = {
-    setProfileThunk,
-    setProfileStatusThunk,
-    updateCurrentUserProfileStatus
-}
-
-const WithRouterProfileContainer = (props) => {
+const ProfileAPIContainer = ({ profile, status, updateCurrentUserProfileStatus, setProfileStatusThunk, setProfileThunk }) => {
+    
     const { id } = useParams()
-    return <>
-        <ProfileAPIContainer {...props} userId={id}/>
+    
+    useEffect(() => {
+        setProfileThunk(id)
+        setProfileStatusThunk(id)
+    }, [])
+
+    return <> 
+        <Profile 
+            updateCurrentUserProfileStatus={updateCurrentUserProfileStatus}
+            profile={profile} 
+            status={status}
+        />
     </>
+    
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WithRouterProfileContainer)
+const mapStateToProps = (state) => ({ profile: getProfile(state), status: getStatus(state) })
+const mapDispatchToProps = { setProfileThunk, setProfileStatusThunk, updateCurrentUserProfileStatus }
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileAPIContainer)
 

@@ -13,7 +13,8 @@ class ProfileInformation extends React.Component {
             statusOnFocus: false
         }
     } 
-    
+
+
     componentDidUpdate(prevProps, prevState) {
         if (this.props.status !== prevProps.status) {
             if (this.props.status) {
@@ -42,11 +43,11 @@ class ProfileInformation extends React.Component {
             <div className={styles.userAboutContainer}>
         
                 <div className={styles.userImage}>
-                    <img src={this.props.largePhoto || userImage} alt="avatar" />
+                    <img src={this.props.profile.largePhoto || userImage} alt="avatar" />
                 </div>
                 
                 <div className={styles.userAbout}>
-                    <h2>{this.props.profileInfo.fullName}</h2>
+                    <h2>{this.props.profile.fullName}</h2>
                     <ProfileStatus 
                         onStatusDoubleClick={this.onStatusDoubleClick}
                         onStatusChange={this.onStatusChange}
@@ -56,9 +57,6 @@ class ProfileInformation extends React.Component {
                     />
                     <hr />
                     <ProfileAbout 
-                        aboutMe={this.props.profileInfo.aboutMe}
-                        lookingForAJobDescription={this.props.profileInfo.lookingForAJobDescription}
-                        vk={this.props.profileInfo.contacts.vk}
                     />
                 </div>  
 

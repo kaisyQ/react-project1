@@ -1,38 +1,41 @@
 import React  from "react"
 import styles from './Posts.module.scss'
-import { Field, reduxForm } from "redux-form"
+import { useFormik } from 'formik';
 import Post from './Post/Post'
 import Button from './../../Common/Button/Button'
 
-let CreatePostForm = (props) => {
-    return <>
-        <form onSubmit={props.handleSubmit}>
-            <Field component='textarea' name='createNewPostTextarea'/>
-            <hr />
-            <div className={styles.createFormBtn}>
-                <Button padding={'5px'}>Create post</Button>
-            </div>
-        </form>
-    </>
-}
+const Posts = ({ createNewPost, posts, photo}) => {
+    const postsFormik = useFormik({
+        initialValues: {
+            newPostVl: ''
+        },
+        onSubmit: (values) => { 
+            createNewPost(values.newPostVl)
+            postsFormik.setFieldValue('newPostVl', '')
+        }
+    })
 
-CreatePostForm = reduxForm ({ form:'createPostForm'}) (CreatePostForm)
-
-const Posts = (props) => {
-
-    const createNewPost = (values) => {
-        if (Object.keys(values).length) props.createNewPost(values.createNewPostTextarea)
-    }
     return <>
         <div className={styles.postsContainer}>
             <div className={styles.posts}>
                 <div className={styles.newPost}>
                     <h4>Create New Post</h4>
-                    <CreatePostForm className={styles.newPostForm} onSubmit={createNewPost}/>
+                    <form onSubmit={postsFormik.handleSubmit}>
+                        <textarea 
+                            name='newPostVl'
+                            onChange={postsFormik.handleChange}
+                            onBlur={postsFormik.handleBlur}
+                            value={postsFormik.values.newPostVl}
+                        />
+                        <hr />
+                        <div className={styles.createFormBtn}>
+                            <Button type="submit" padding={'5px'}>Create post</Button>
+                        </div>
+                    </form>
                 </div>
                 <div className={styles.allPosts}>
                     <h4>All Posts</h4>
-                    {props.postPageData.posts.map((mess, index) => <Post key={index} {...props} message={mess}/>)}
+                    { posts.map((message, index) => <Post key={index} photo={photo} message={message}/>) }
                 </div>
             </div>
         </div>
