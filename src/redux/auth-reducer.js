@@ -27,7 +27,7 @@ const authReducer = (state=defaultStateValue, action) => {
     }
 }
 
-export const login = (isAuth, userData) => ({type: CHANGE_ISAUTH, isAuth, userData})
+export const login = (isAuth, userData) => ({ type: CHANGE_ISAUTH, isAuth, userData })
 export const logout = () => ({ type: LOGOUT })
 
 

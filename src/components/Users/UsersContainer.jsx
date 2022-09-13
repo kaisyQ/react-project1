@@ -1,7 +1,7 @@
 import UsersAPIContainer from "./UsersApiContainer"
 import { connect } from "react-redux"
 import { getCurrentPage, getIsFetching, getPageCount, getTotalCount, getUserInFollowingProcess, getUsersToShow } from "../../redux/selectors/users-selector"
-import { usersActionCreater, getUsers, getUserAtNumPage, makeUserFollowed, makeUserUnfollowed } from "../../redux/users-reducer"
+import { follow, changeCurrentPage, getUsers, getUserAtNumPage, makeUserFollowed, makeUserUnfollowed } from "../../redux/users-reducer"
 
 
 const mapStateToProps = (state) => ({
@@ -14,8 +14,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-    follow: usersActionCreater.follow,
-    changeCurrentPage: usersActionCreater.changeCurrentPage,
+    follow,
+    changeCurrentPage,
     getUsers,
     getUserAtNumPage,
     makeUserFollowed,

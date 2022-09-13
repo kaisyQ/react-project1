@@ -11,7 +11,8 @@ const defaultStateValue = {
     isFetching: true
 }
 const appReducer = (state=defaultStateValue, action) => {
-    switch(action.type) {
+    const { type } = action
+    switch(type) {
         case CHECK_ISAUTH_TAKE_USER_DT:
             return {
                 ...state,
@@ -30,16 +31,12 @@ const appReducer = (state=defaultStateValue, action) => {
     }
 }
 
-export const appIsAuth = (isAuth, email, login, id) => {
-    return { type: CHECK_ISAUTH_TAKE_USER_DT, isAuth, email, login, id}
-}
-
-export const appisFetching = (isFetching) => { return { type: CHANGE_FETCHING, isFetching } }
+export const appIsAuth = (isAuth, email, login, id) => ({ type: CHECK_ISAUTH_TAKE_USER_DT, isAuth, email, login, id})
+export const appisFetching = (isFetching) => ({ type: CHANGE_FETCHING, isFetching })
  
 export const appIsAuthThnk = () => (dispatch) => {
     dispatch(appisFetching(true))
     authAPI.checkAuthMe().then(response => {
-        // check resultCode
         if (response.data.data.id && response.data.data.email && response.data.data.login) {
             dispatch(appIsAuth(true, response.data.data.email, response.data.data.login, response.data.data.id))
         } else {

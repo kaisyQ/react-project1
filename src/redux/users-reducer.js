@@ -17,15 +17,13 @@ const defaultStateValue = {
     userInFollowingProcess: []
 }
 
-export const usersActionCreater = {
-    loadUsers: (newUsers) => { return {type: LOAD_USERS, newUsers: newUsers} },
-    follow: (id) => { return {type: FOLLOW_USER, userId: id} },
-    changeCurrentPage: (pageNumber) => { return {type: CHANGE_CURRENT_PAGE, pageNumber: pageNumber} },
-    totalCount: (number) => {return {type: SET_TOTAL_COUNT, totalCount:number} },
-    changeFetching: (changeHow) => { return {type: CHANGE_FETCHING, changeHow:changeHow} },
-    pushUserToFollowArr: (pushingUserId) => { return{type: ADD_USER_ARR_FOLLOWING_PROCESS, pushingUserId: pushingUserId} },
-    deleteUserInFollowArr: (deleteUserId) => { return{type:DELETE_USER_ARR_FOLLOWING_PROCESS, deleteUserId: deleteUserId} }
-}
+export const loadUsers = (newUsers) => ({ type: LOAD_USERS, newUsers })
+export const follow = (userId) => ({ type: FOLLOW_USER, userId })
+export const changeCurrentPage = (pageNumber) => ({ type: CHANGE_CURRENT_PAGE, pageNumber })
+export const totalCount = (totalCount) => ({ type: SET_TOTAL_COUNT, totalCount })
+export const changeFetching = (changeHow) => ({ type: CHANGE_FETCHING, changeHow })
+export const pushUserToFollowArr = (pushingUserId) => ({ type: ADD_USER_ARR_FOLLOWING_PROCESS, pushingUserId })
+export const deleteUserInFollowArr = (deleteUserId) => ({ type:DELETE_USER_ARR_FOLLOWING_PROCESS, deleteUserId })
 
 const usersReducer = (state=defaultStateValue, action) => {
     switch (action.type) {
@@ -75,43 +73,43 @@ const usersReducer = (state=defaultStateValue, action) => {
 
 export const getUsers = (page) => {
     return (dispatch) => {
-        dispatch(usersActionCreater.changeFetching(true))
+        dispatch(changeFetching(true))
         usersAPI.getUsersFromServer(page).then( response => {
-            dispatch(usersActionCreater.totalCount(response.data.totalCount))
-            dispatch(usersActionCreater.loadUsers(response.data.items))
-            dispatch(usersActionCreater.changeFetching(false))
+            dispatch(totalCount(response.data.totalCount))
+            dispatch(loadUsers(response.data.items))
+            dispatch(changeFetching(false))
         })
     }
 }
 
 export const getUserAtNumPage = (page, count) => (dispatch) => {
-    dispatch(usersActionCreater.changeFetching(true))
+    dispatch(changeFetching(true))
     
         usersAPI.getPageUsersFromServer(page, count).then( response => {
-            dispatch(usersActionCreater.loadUsers(response.data.items))
-            dispatch(usersActionCreater.totalCount(response.data.totalCount))
-            dispatch(usersActionCreater.changeFetching(false))
+            dispatch(loadUsers(response.data.items))
+            dispatch(totalCount(response.data.totalCount))
+            dispatch(changeFetching(false))
         })
 }
 
 export const makeUserFollowed = (id) => (dispatch) => {
     debugger
-    dispatch(usersActionCreater.pushUserToFollowArr(id))
+    dispatch(pushUserToFollowArr(id))
     followAPI.followUser(id).then(response => {
         debugger
         if (response.data.resultCode === 0) {
-            dispatch(usersActionCreater.deleteUserInFollowArr(id)) 
-            dispatch(usersActionCreater.follow(id))  
+            dispatch(deleteUserInFollowArr(id)) 
+            dispatch(follow(id))  
         } 
     })
 }
 
 export const makeUserUnfollowed = (id) => (dispatch) => {
-    dispatch(usersActionCreater.pushUserToFollowArr(id))
+    dispatch(pushUserToFollowArr(id))
     followAPI.unfollowUser(id).then(response => {
         if (response.data.resultCode === 0) {
-            dispatch(usersActionCreater.deleteUserInFollowArr(id)) 
-            dispatch(usersActionCreater.follow(id))  
+            dispatch(deleteUserInFollowArr(id)) 
+            dispatch(follow(id))  
         } 
     })
 }
