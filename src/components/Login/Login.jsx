@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import Button from "../Common/Button/Button"
 import styles from './Login.module.scss'
  
-const Login = ({ isAuth, login }) => {
+const Login = ({ isAuth, LoginThnk }) => {
   
     const loginFormik = useFormik({
         initialValues: {
@@ -21,7 +21,7 @@ const Login = ({ isAuth, login }) => {
             repeatPassword: Yup.string().oneOf([Yup.ref('password'), null], "Does not match with Password!")
         }),
         onSubmit: (values) => {
-            login(values.email, values.password, values.rememberMe)
+            LoginThnk(values.email, values.password, values.rememberMe)
         }
     })
 

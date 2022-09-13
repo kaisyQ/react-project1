@@ -1,26 +1,23 @@
 import React from "react"
 import { NavLink } from "react-router-dom"
 
-import css from './Header.module.scss'
+import styles from './Header.module.scss'
 import Button from './../Common/Button/Button'
 
-const Header = ({isAuth, login, logout}) => {
-    const logoutBtnClick = () => {
-        logout()
-    }
+const Header = ({ isAuth, login, logout }) => {
 
     return (
-        <header className={css.header}>
-            <div className={css.headerLogo}>
+        <header className={styles.header}>
+            <div className={styles.headerLogo}>
                 <img src="./logo.png" alt="logo"/>
                 <span>Company Logo</span>
             </div>
             {
                 isAuth 
-                ?   <div className={css.logout}>
-                        <h4>{login}</h4>
+                ?   <div className={styles.logout}>
+                        <h4>{ login }</h4>
                         <div>
-                            <Button onClick={logoutBtnClick}>Log out</Button>
+                            <Button onClick={() => {logout()}}>Log out</Button>
                         </div>
                     </div>
                 :

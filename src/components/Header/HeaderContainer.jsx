@@ -5,10 +5,7 @@ import { getIsAuth, getLogin } from "../../redux/selectors/app-selector"
 
 import Header from "./Header"
 
-const mapStateToProps = (state) => ({
-    isAuth: getIsAuth(state), 
-    login: getLogin(state)
-})
+const mapStateToProps = (state) => ({ isAuth: getIsAuth(state),  login: getLogin(state) })
 
 const mapDispatchToProps = { logout }
 

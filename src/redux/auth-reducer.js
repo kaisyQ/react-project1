@@ -1,6 +1,6 @@
 import { authAPI } from "../api/api"
 
-const CHANGE_ISAUTH_VALUE = 'CHANGE-ISAUTH-VALUE'
+const CHANGE_ISAUTH = 'CHANGE-ISAUTH'
 const LOGOUT = 'LOGOUT'
 
 const defaultStateValue = {
@@ -10,7 +10,7 @@ const defaultStateValue = {
 
 const authReducer = (state=defaultStateValue, action) => {
     switch(action.type) {
-        case CHANGE_ISAUTH_VALUE:
+        case CHANGE_ISAUTH:
             return {
                 ...state,
                 userData: action.userData,
@@ -19,7 +19,7 @@ const authReducer = (state=defaultStateValue, action) => {
         case LOGOUT:
             return {
                 ...state, 
-                isAuth:false,
+                isAuth: false,
                 userData: null
             }
         default:
@@ -27,35 +27,30 @@ const authReducer = (state=defaultStateValue, action) => {
     }
 }
 
-export const isAuthActionCreater = (newIsAuthValue, userData) => {
-    return {type: CHANGE_ISAUTH_VALUE, newIsAuthValue: newIsAuthValue, userData: userData}
-} 
-
-export const LogoutActionCreater = () => {
-    return {type: LOGOUT}
-}
+export const login = (isAuth, userData) => ({type: CHANGE_ISAUTH, isAuth, userData})
+export const logout = () => ({ type: LOGOUT })
 
 
-export const isAuthThunk = () => (dispatch) => {
+export const CheckMe = () => (dispatch) => {
     authAPI.checkAuthMe().then(response => {
-        dispatch(isAuthActionCreater(true, response.data))
+        dispatch(login(true, response.data))
     })
 }
 
-export const login = (email, password, rememberMe) => (dispatch) => {
+export const Login = (email, password, rememberMe) => (dispatch) => {
     authAPI.login(email, password, rememberMe).then(response => {
         if (response.data.resultCode === 0) {
             authAPI.checkAuthMe().then(response => {
-                dispatch(isAuthActionCreater(true, response.data))
+                dispatch(login(true, response.data))
             })
         }
     })
 }
 
-export const logout = () => (dispatch) => {
+export const Logout = () => (dispatch) => {
     authAPI.logout().then(response => {
         if (response.resultCode === 0) {
-            dispatch(LogoutActionCreater())
+            dispatch(logout())
         }
     })
 }
