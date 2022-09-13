@@ -1,19 +1,11 @@
-import { connect } from "react-redux"
-import { createNewMessageActionCreater } from "../../redux/dialogs-reducer"
 import Dialogs from './Dialogs'
 import withAuthRedirectContainer from "../../hoc/withAuthRedirect"
+import { connect } from "react-redux"
+import { createNewMessage } from "../../redux/dialogs-reducer"
+import { getIsAuth } from "../../redux/selectors/app-selector"
+import { getChats, getMessages } from "../../redux/selectors/dialogs-selector"
 
-let mapStateToProps = (state) => {
-    return { 
-        dialogsPageData: state.dialogsPageData,
-        isAuth: state.app.isAuth 
-    }
-}
+const mapStateToProps = (state) => ({ chats: getChats(state), messages: getMessages(state), isAuth: getIsAuth(state)})
+const mapDispatchToProps = { createNewMessage }
 
-const mapDispatchToProps = { createNewMessage: createNewMessageActionCreater }
-
-const RedirectDialogContainer = withAuthRedirectContainer(Dialogs)
-
-const DialogContainer = connect( mapStateToProps, mapDispatchToProps )( RedirectDialogContainer )
-
-export default DialogContainer
+export default connect(mapStateToProps, mapDispatchToProps)(withAuthRedirectContainer(Dialogs))

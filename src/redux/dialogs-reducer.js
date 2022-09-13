@@ -1,14 +1,16 @@
 const CREATE_NEW_MESSAGE = 'CREATE-NEW-MESSAGE'
 
 const defaultStateValue =  {
-    dialogs : ['Vasua', 'Dima', 'Maxim'],
-    messages : [ 'first message', '2 message', '3 message', '4 message', 'sad mess' ]
+    chats : ['First user', 'Second user', 'Third user'],
+    messages : ['1 message', '2 message', '3 message', '4 message', '5 message']
 }
 
-export const createNewMessageActionCreater = (text) => { return { type: CREATE_NEW_MESSAGE, text } }
+export const createNewMessage = (text) => ({ type: CREATE_NEW_MESSAGE, text })
 
 const dialogsReducer = (state=defaultStateValue, action) => {
-    switch (action.type) {
+    const { type } = action
+
+    switch (type) {
         case CREATE_NEW_MESSAGE:
             return {
                 ...state,

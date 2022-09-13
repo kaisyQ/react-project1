@@ -1,33 +1,38 @@
 import React from "react"
-import css from './Dialogs.module.css'
-
+import styles from './Dialogs.module.scss'
+import Button from './../Common/Button/Button'
 import { NavLink } from "react-router-dom"
-import { Field, reduxForm } from 'redux-form'
+import { useFormik } from 'formik';
 
-let SendMessageForm = (props) => {
-    return <form onSubmit={props.handleSubmit}>
-        <Field component='textarea' name='newMessageText'/>
-        <div>
-            <button> Send </button>
-        </div> 
-    </form>
-}
+const Dialogs = ({ chats, messages, createNewMessage }) => {
 
-SendMessageForm = reduxForm({form: 'sendMessageForm'})(SendMessageForm)
-
-const Dialogs = (props) => {
-
-    const createNewMessage = (values) => { props.createNewMessage(values.newMessageText) }
+    const chatFormik = useFormik({
+        initialValues: {
+            newMessageText: ''
+        },
+        onSubmit: (values) => { createNewMessage(values.newMessageText) }
+    })
 
     return (
-        <div className={css.content}>
-           <div className={css.dialogs}>
-                {props.dialogsPageData.dialogs.map((dialogName) => <NavLink to="dialogs/1" className={css.item}> {dialogName} </NavLink>)}
+        <div className={styles.content}>
+           <div className={styles.dialogs}>
+                { chats.map((dialogName) => <NavLink to="dialogs/1" className={styles.item}>
+                        <div>
+                            {dialogName} 
+                        </div>
+                    </NavLink>) }
            </div>
-           <div className={css.messages}>
-                {props.dialogsPageData.messages.map( mess => <div className="message">{mess}</div>)}
+           <div className={styles.messages}>
+                { messages.map( (text, index) => <div key={index} className="message">{ text }</div>) }
                 <h4>new message</h4>
-                <SendMessageForm onSubmit={createNewMessage}/>
+                <form onSubmit={chatFormik.handleSubmit}>
+                    <textarea 
+                        name='newMessageText'
+                        value={chatFormik.values.newMessageText}
+                        onChange={chatFormik.handleChange}
+                    />
+                    <Button padding={'5px 10px'}>Send</Button>
+                </form>
            </div>
         </div>
     )
