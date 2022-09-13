@@ -5,8 +5,6 @@ const defaultStateValue =  {
     messages : ['1 message', '2 message', '3 message', '4 message', '5 message']
 }
 
-export const createNewMessage = (text) => ({ type: CREATE_NEW_MESSAGE, text })
-
 const dialogsReducer = (state=defaultStateValue, action) => {
     const { type } = action
 
@@ -21,5 +19,7 @@ const dialogsReducer = (state=defaultStateValue, action) => {
     }
 }
 
+
+export const createNewMessage = (text) => ({ type: CREATE_NEW_MESSAGE, text })
 
 export default dialogsReducer
