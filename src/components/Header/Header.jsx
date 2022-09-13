@@ -17,7 +17,7 @@ const Header = ({ isAuth, login, logout }) => {
                 ?   <div className={styles.logout}>
                         <h4>{ login }</h4>
                         <div>
-                            <Button onClick={() => {logout()}}>Log out</Button>
+                            <Button onClick={() => { logout() }}>Log out</Button>
                         </div>
                     </div>
                 :

@@ -49,9 +49,6 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({ isFetching: state.app.isFetching })
-
 const mapDispatchToProps = { appIsAuthThnk }
 
-const AppContainer = connect(mapStateToProps, mapDispatchToProps) (App)
-
-export default AppContainer
+export default connect(mapStateToProps, mapDispatchToProps) (App)
