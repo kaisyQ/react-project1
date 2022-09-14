@@ -72,7 +72,6 @@ export const getUserAtNumPage = (page, count) => (dispatch) => {
 export const makeUserFollowed = (id) => (dispatch) => {
     dispatch(pushUserToFollowArr(id))
     followAPI.followUser(id).then(response => {
-        debugger
         if (response.data.resultCode === 0) {
             dispatch(deleteUserInFollowArr(id)) 
             dispatch(follow(id))  
@@ -89,6 +88,5 @@ export const makeUserUnfollowed = (id) => (dispatch) => {
         } 
     })
 }
-
 
 export default usersSlice.reducer

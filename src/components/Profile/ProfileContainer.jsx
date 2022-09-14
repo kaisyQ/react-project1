@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { useParams } from "react-router-dom"
 import { setProfileThunk, setProfileStatusThunk, updateCurrentUserProfileStatus } from './../../redux/profile-reducer'
 import { getProfile, getStatus } from './../../redux/selectors/profile-selector'
-import { getIsAuth } from "../../redux/selectors/app-selector"
+import { getIsAuth } from "../../redux/selectors/auth-selector"
 import withAuthRedirectContainer from "../../hoc/withAuthRedirect"
 import Profile from "./Profile"
 

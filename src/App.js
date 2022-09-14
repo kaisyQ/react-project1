@@ -1,7 +1,8 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom'
 import React from 'react'
 import { connect } from 'react-redux'
-import { appIsAuthThnk } from './redux/app-reducer'
+import { getIsFetching } from './redux/selectors/auth-selector'
+import { CheckMe } from './redux/auth-reducer'
 
 import './App.scss'
 
@@ -20,12 +21,12 @@ import Preloader from './components/Common/Preloader/Preloader'
 class App extends React.Component {
 
     componentDidMount () {
-        this.props.appIsAuthThnk()
+        this.props.CheckMe()
     }
 
     render () {
         if (this.props.isFetching) return <Preloader />
-        return (
+        return <>
             <BrowserRouter>
                 <div className="app-wrapper">
                     <HeaderContainer />
@@ -44,11 +45,11 @@ class App extends React.Component {
                     </div>
                 </div>
             </BrowserRouter>
-        ) 
+        </>
     }
 }
 
-const mapStateToProps = (state) => ({ isFetching: state.app.isFetching })
-const mapDispatchToProps = { appIsAuthThnk }
+const mapStateToProps = (state) => ({ isFetching: getIsFetching(state) })
+const mapDispatchToProps = { CheckMe }
 
 export default connect(mapStateToProps, mapDispatchToProps) (App)

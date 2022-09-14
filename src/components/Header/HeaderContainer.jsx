@@ -1,7 +1,7 @@
 import { connect } from "react-redux"
 
 import { logout } from '../../redux/auth-reducer'
-import { getIsAuth, getLogin } from "../../redux/selectors/app-selector"
+import { getIsAuth, getLogin } from "../../redux/selectors/auth-selector"
 
 import Header from "./Header"
 
