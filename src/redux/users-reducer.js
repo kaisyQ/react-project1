@@ -1,77 +1,53 @@
 import { followAPI, usersAPI } from "../api/api"
+import { createSlice } from "@reduxjs/toolkit"
 
-const LOAD_USERS = 'LOAD-USERS'
-const FOLLOW_USER = 'FOLLOW-USER'
-const CHANGE_CURRENT_PAGE = 'CHANGE-CURRENT-PAGE'
-const SET_TOTAL_COUNT = 'SET-TOTAL-COUNT'
-const CHANGE_FETCHING = 'CHANGE-FETCHING'
-const ADD_USER_ARR_FOLLOWING_PROCESS = 'ADD-USER-ARR-FOLLOWING-PROCESS'
-const DELETE_USER_ARR_FOLLOWING_PROCESS = 'DELETE-USER-ARR-FOLLOWING-PROCESS'
-
-const defaultStateValue = {
-    usersToShow: [],
-    currentPage: 1,
-    pageCount: 20,
-    totalCount: 0,
-    isFetching: true,
-    userInFollowingProcess: []
-}
-
-const usersReducer = (state=defaultStateValue, action) => {
-    const { type } = action
-
-    switch (type) {
-        case LOAD_USERS:
-            return {
-                ...state,
-                usersToShow: action.newUsers
-            }
-        case FOLLOW_USER: 
-            return {
-                ...state,
-                usersToShow: state.usersToShow.map(user => {
-                    if (user.id === action.userId) return {...user, followed: !user.followed}
-                    else return user
-                })
-            }
-        case CHANGE_CURRENT_PAGE: 
-            return {
-                ...state,
-                currentPage: action.pageNumber
-            }
-        case SET_TOTAL_COUNT:
-            return {
-                ...state, 
-                totalCount: action.totalCount
-            }
-        case CHANGE_FETCHING:
-            return {
-                ...state,
-                isFetching: action.changeHow
-            }
-        case ADD_USER_ARR_FOLLOWING_PROCESS:
-            return {
-                ...state,
-                userInFollowingProcess: [...state.userInFollowingProcess, action.pushingUserId]
-            }
-        case DELETE_USER_ARR_FOLLOWING_PROCESS:
-            return {
-                ...state, 
-                userInFollowingProcess: state.userInFollowingProcess.filter((userId) => userId !== action.deleteUserId)
-            }
-        default:
-            return state;
+const usersSlice = createSlice({
+    name: 'users', 
+    initialState: {
+        usersToShow: [],
+        currentPage: 1,
+        pageCount: 20,
+        totalCount: 0,
+        isFetching: true,
+        userInFollowingProcess: []
+    },
+    reducers: {
+        loadUsers: (state, action) => {
+            state.usersToShow = action.payload
+        },
+        follow: (state, action) => {
+            state.usersToShow = state.usersToShow
+                .map(user => user.id === action.payload ? ({ ...user, followed: !user.followed }) : user)
+        },
+        changeCurrentPage: (state, action) => {
+            state.currentPage = action.payload
+        },
+        changeFetching: (state, action) => {
+            state.isFetching = action.payload
+        },
+        totalCount: (state, action) => {
+            state.totalCount = action.payload
+        },
+        pushUserToFollowArr: (state, action) => {
+            state.userInFollowingProcess.push(action.payload)
+        },
+        deleteUserInFollowArr: (state, action) => {
+            state.userInFollowingProcess = state.userInFollowingProcess
+                .filter((userId) => userId !== action.payload)
+        }
     }
+})
 
-}
+export const { 
+    loadUsers, 
+    follow, 
+    changeCurrentPage, 
+    totalCount, 
+    changeFetching, 
+    pushUserToFollowArr, 
+    deleteUserInFollowArr
+} = usersSlice.actions
 
-export const loadUsers = (newUsers) => ({ type: LOAD_USERS, newUsers })
-export const follow = (userId) => ({ type: FOLLOW_USER, userId })
-export const changeCurrentPage = (pageNumber) => ({ type: CHANGE_CURRENT_PAGE, pageNumber })
-export const totalCount = (totalCount) => ({ type: SET_TOTAL_COUNT, totalCount })
-export const changeFetching = (changeHow) => ({ type: CHANGE_FETCHING, changeHow })
-export const pushUserToFollowArr = (pushingUserId) => ({ type: ADD_USER_ARR_FOLLOWING_PROCESS, pushingUserId })
-export const deleteUserInFollowArr = (deleteUserId) => ({ type:DELETE_USER_ARR_FOLLOWING_PROCESS, deleteUserId })
 
 export const getUsers = (page) => {
     return (dispatch) => {
@@ -115,4 +91,4 @@ export const makeUserUnfollowed = (id) => (dispatch) => {
 }
 
 
-export default usersReducer
+export default usersSlice.reducer

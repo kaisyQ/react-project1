@@ -1,49 +1,30 @@
 import { authAPI, profileAPI } from "../api/api"
+import { createSlice } from "@reduxjs/toolkit"
 
-const ADD_POST = 'ADD-POST'
-const SET_PROFILE = 'SET-PROFILE'
-const SET_PROFILE_STATUS = 'SET-PROFILE-STATUS'
-const UPDATE_STATUS = 'UPDATE-STATUS'
-
-const defaultStateValue = {
-    posts: ['first post', 'second post'],
-    profile: null,
-    status: ''
-} 
-
-const profileReducer = (state=defaultStateValue, action) => {
-    const { type } = action
-
-    switch (type) {
-        case ADD_POST:
-            return {
-                ...state,
-                posts: [...state.posts, action.text]
-            }
-        case SET_PROFILE:
-            return {
-                ...state, 
-                profile: action.profile
-            }
-        case SET_PROFILE_STATUS:
-            return {
-                ...state, 
-                status: action.status
-            }
-        case UPDATE_STATUS:
-            return {
-                ...state,
-                state: action.newStatus
-            }
-        default:
-            return state
+const profileSlice = createSlice({
+    name: 'profile',
+    initialState: {
+        posts: ['first post', 'second post'],
+        profile: null,
+        status: ''
+    },
+    reducers: {
+        createNewPost: (state, action) => {
+            state.posts.push(action.payload)
+        },
+        setProfile: (state, action) => {
+            state.profile = action.payload
+        },
+        setProfileStatus: (state, action) => {
+            state.status = action.payload
+        },
+        updateStatus: (state, action) => {
+            state.status = action.payload
+        }
     }
-}
+})
 
-export const createNewPost = (text) => ({ type: ADD_POST, text })
-export const setProfile = (profile) => ({ type: SET_PROFILE, profile })
-export const setProfileStatus = (status) => ({ type: SET_PROFILE_STATUS, status })
-export const updateStatus = (newStatus) => ({ type: UPDATE_STATUS, newStatus})
+export const { createNewPost, setProfile, setProfileStatus, updateStatus } = profileSlice.actions
 
 
 export const setProfileThunk = (userId) => (dispatch) => {
@@ -90,4 +71,4 @@ export const updateCurrentUserProfileStatus = (status) => (dispatch) => {
     })
 }
 
-export default profileReducer
+export default profileSlice.reducer

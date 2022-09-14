@@ -26,7 +26,6 @@ const appSlice = createSlice ({
 export const { checkIsAuth, changeFetching } = appSlice.actions
 
 export const appIsAuthThnk = () => (dispatch) => {
-    console.log('here')
     dispatch(changeFetching(true))
     authAPI.checkAuthMe().then(response => {
         if (response.data.data.id && response.data.data.email && response.data.data.login) {

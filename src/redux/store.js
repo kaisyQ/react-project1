@@ -10,11 +10,11 @@ import appReducer from './app-reducer'
 
 
 const reducers = combineReducers({
-        dialogs: dialogsReducer,
-        profile: profileReducer,
-        users: usersReducer,
-        auth: authReducer,
-        app: appReducer
+    dialogs: dialogsReducer,
+    profile: profileReducer,
+    users: usersReducer,
+    auth: authReducer,
+    app: appReducer
 })
 
 const store = configureStore({

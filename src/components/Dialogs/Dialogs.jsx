@@ -4,19 +4,19 @@ import Button from './../Common/Button/Button'
 import { NavLink } from "react-router-dom"
 import { useFormik } from 'formik';
 
-const Dialogs = ({ chats, messages, createNewMessage }) => {
+const Dialogs = ({ chats, messages, createMessage }) => {
 
     const chatFormik = useFormik({
         initialValues: {
             newMessageText: ''
         },
-        onSubmit: (values) => { createNewMessage(values.newMessageText) }
+        onSubmit: (values) => { createMessage(values.newMessageText) }
     })
 
     return (
         <div className={styles.content}>
            <div className={styles.dialogs}>
-                { chats.map((dialogName) => <NavLink to="dialogs/1" className={styles.item}>
+                { chats.map((dialogName, index) => <NavLink to="dialogs/1" className={styles.item} key={index}>
                         <div>
                             {dialogName} 
                         </div>

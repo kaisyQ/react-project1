@@ -1,35 +1,25 @@
 import { authAPI } from "../api/api"
+import { createSlice } from "@reduxjs/toolkit"
 
-const CHANGE_ISAUTH = 'CHANGE-ISAUTH'
-const LOGOUT = 'LOGOUT'
-
-const defaultStateValue = {
-    isAuth:false,
-    userData: null
-}
-
-const authReducer = (state=defaultStateValue, action) => {
-    switch(action.type) {
-        case CHANGE_ISAUTH:
-            return {
-                ...state,
-                userData: action.userData,
-                isAuth: action.newIsAuthValue
-            }
-        case LOGOUT:
-            return {
-                ...state, 
-                isAuth: false,
-                userData: null
-            }
-        default:
-            return state
+const authSlice = createSlice({
+    name: 'auth',
+    initialState: {
+        isAuth:false,
+        userData: null
+    },
+    reducers: {
+        login: (state, action) => {
+            state.isAuth = action.payload.isAuth
+            state.userData = action.payload.userData
+        },
+        logout: (state, action) => {
+            state.isAuth = false
+            state.userData = null
+        }
     }
-}
+})
 
-export const login = (isAuth, userData) => ({ type: CHANGE_ISAUTH, isAuth, userData })
-export const logout = () => ({ type: LOGOUT })
-
+export const { login, logout } = authSlice.actions
 
 export const CheckMe = () => (dispatch) => {
     authAPI.checkAuthMe().then(response => {
@@ -56,4 +46,4 @@ export const Logout = () => (dispatch) => {
 }
 
 
-export default authReducer
+export default authSlice.reducer
