@@ -1,50 +1,47 @@
 import { authAPI } from "../api/api"
+import { createSlice } from "@reduxjs/toolkit"
 
-const CHECK_ISAUTH_TAKE_USER_DT = 'CHECK-ISAUTH-TAKE_USER_DT'
-const CHANGE_FETCHING = 'CHANGE_FETCHING'
-
-const defaultStateValue = {
-    isAuth: false,
-    email: null, 
-    login: null,
-    id: null,
-    isFetching: true
-}
-const appReducer = (state=defaultStateValue, action) => {
-    const { type } = action
-    switch(type) {
-        case CHECK_ISAUTH_TAKE_USER_DT:
-            return {
-                ...state,
-                isAuth: action.isAuth,
-                email: action.email,
-                login: action.login,
-                id: action.id
-            }
-        case CHANGE_FETCHING:
-            return {
-                ...state,
-                isFetching: action.isFetching
-            }
-        default:
-            return state
+const appSlice = createSlice ({
+    name: 'app',
+    initialState: {
+        isAuth: false,
+        email: null, 
+        login: null,
+        id: null,
+        isFetching: true
+    },
+    reducers: {
+        checkIsAuth: (state, action) => {
+            state.isAuth = action.payload.isAuth
+            state.email = action.payload.email
+            state.login = action.payload.login
+            state.id = action.payload.id
+        },
+        changeFetching: (state, action) => {
+            state.isFetching = action.payload
+        }
     }
-}
+})
 
-export const appIsAuth = (isAuth, email, login, id) => ({ type: CHECK_ISAUTH_TAKE_USER_DT, isAuth, email, login, id})
-export const appisFetching = (isFetching) => ({ type: CHANGE_FETCHING, isFetching })
- 
+export const { checkIsAuth, changeFetching } = appSlice.actions
+
 export const appIsAuthThnk = () => (dispatch) => {
-    dispatch(appisFetching(true))
+    console.log('here')
+    dispatch(changeFetching(true))
     authAPI.checkAuthMe().then(response => {
         if (response.data.data.id && response.data.data.email && response.data.data.login) {
-            dispatch(appIsAuth(true, response.data.data.email, response.data.data.login, response.data.data.id))
+            dispatch(checkIsAuth({
+                isAuth: true, 
+                email: response.data.data.email, 
+                login: response.data.data.login, 
+                id: response.data.data.id
+            }))
         } else {
-            dispatch(appIsAuth(false, null, null, null))
+            dispatch(checkIsAuth({ isAuth: false, email: null, login: null, id: null }))
         }
-        dispatch(appisFetching(false))
+        dispatch(changeFetching(false))
 
     })
 }
 
-export default appReducer
+export default appSlice.reducer
