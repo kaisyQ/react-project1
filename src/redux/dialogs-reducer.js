@@ -9,7 +9,6 @@ const dialogsSlice = createSlice({
     },
     reducers: {
         createMessage: (state, action) => {
-            console.log(action.payload)
             state.messages.push(action.payload)
         }
     }

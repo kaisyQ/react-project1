@@ -8,7 +8,6 @@ import Button from './../../Common/Button/Button'
 
 const User = (props) => {
     const onFollow = (id) => {
-        console.log('click')
         props.makeUserFollowed(id)
     }
 

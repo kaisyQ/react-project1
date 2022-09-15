@@ -1,22 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Users from "./Users"
 
-class UsersAPIContainer extends React.Component {
+const UsersAPIContainer = (props) => {
 
-    componentDidMount = () => {
-        this.props.getUsers(1)
-    }
+    useEffect(() => {
+        props.getUsers(1)
+    }, [])
     
-    getUsersToShow = (num) => {
-        this.props.getUserAtNumPage(num, this.props.pageCount)
-    }
+    const getUsersToShow = (num) => { props.getUserAtNumPage(num, props.pageCount) }
 
 
-    render () {
-        return <>
-            <Users {...this.props} getUsersToShow={this.getUsersToShow} />  
-        </>
-    }
+    return <>
+        <Users {...props} getUsersToShow={getUsersToShow} />  
+    </>
 }
 
 export default UsersAPIContainer
