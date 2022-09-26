@@ -1,16 +1,16 @@
 .nav {
+    padding: 20px 10px;
     grid-area: nav;
     background-color: #fff;
 }
 
 .navItem {
-    margin: 30px 5px;
     padding: 10px 30px;
 
     font: inherit;
     font-weight: 300;
     text-align: left;
-    
+
     cursor: pointer;
 }
 

@@ -16,25 +16,36 @@ const Dialogs = ({ chats, messages, createMessage }) => {
     return (
         <div className={styles.content}>
            <div className={styles.dialogs}>
-                { 
+                {
                     chats
-                    .map((dialogName, index) => <NavLink to="dialogs/1" className={styles.item} key={index}>
+                    .map((dialogName, index) => <NavLink to="dialogs/1" className={styles.dialogs__item} key={index}>
                             <div>
-                                {dialogName} 
+                                {dialogName}
                             </div>
-                        </NavLink>) 
+                        </NavLink>)
                 }
            </div>
-           <div className={styles.messages}>
-                { messages.map( (text, index) => <div key={index} className="message">{ text }</div>) }
-                <h4>new message</h4>
+            <div className={styles.messages}>
+                <div className={styles.messages__scroll}>
+                    { messages.map( (text, index) => <div key={index} className="message">{ text }</div>) }
+                    <div className={styles.message__send}>
+                        <h2>Ruslan</h2>
+                        <p>sdasdasd asdasdasdf sdfsdfsdfsdfsdfs dfsdfsdfsdfsdfsd fsdfsdfsdf sdfsdfsdfsda dasdasdads</p>
+                    </div>
+                    <div className={styles.message__get}>
+                        <h2>Roma</h2>
+                        sdasdas dasdasdas dsdfsdfsdfsdf sdfsdfs dfsd asda sdasdasdas dadas dasdadadad asdsadsasassa sdasda sdas dasda sdasdasdasdd
+                    </div>
+                </div>
                 <form onSubmit={chatFormik.handleSubmit}>
-                    <textarea 
+                    <div contentEditable='true'
                         name='newMessageText'
                         value={chatFormik.values.newMessageText}
                         onChange={chatFormik.handleChange}
-                    />
-                    <Button padding={'5px 10px'}>Send</Button>
+                        placeholder='Enter new message...'
+                    >
+                    </div>
+                    <Button padding={'8px 10px'}>Send</Button>
                 </form>
            </div>
         </div>

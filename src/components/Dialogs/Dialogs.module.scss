@@ -1,23 +1,82 @@
 .content {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
+    display: flex;
+    height: 100%;
+    max-width: 975px
+}
+
+.dialogs {
+    padding: 15px 20px;
+    width: 250px;
+}
+
+.dialogs__item {
+    display: inline-block;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .messages {
-    border: 1px solid #000;
-    min-height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 1156px;
+    border-left: 1px solid #ccc;
 
-    h4 {
-        margin: 20px 0;
-    }
+
     form {
+        padding: 10px 15px;
         display: flex;
-        align-items: center;
-    }
-    textarea {
-        border: 1px solid #000;
-        resize: none;
-        height: 100%;
+        align-items: flex-end;
+
+        justify-content: space-between;
+
+        [contentEditable=true]:empty:focus:before, [contentEditable=true]:empty:not(:focus):before {
+            content: attr(placeholder);
+            color: #bbb;
+        }
+
+        div {
+            width: 640px;
+            max-height: 200px;
+            padding: 8px 10px;
+
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: 0;
+
+            overflow-y: scroll;
+            &:focus {
+                border-color: #bbb;
+                box-shadow: 1px 1px 2px #bbb;
+            }
+        }
     }
 }
 
+.messages__scroll {
+    width: 750px;
+    flex-grow: 1;
+
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+
+    overflow-y: scroll;
+}
+
+.message__send,
+.message__get {
+    margin-bottom: 5px;
+
+    h2 {
+        margin-bottom: 2px;
+        font-size: 20px;
+    }
+}
+
+.message__send {
+    text-align: left;
+}
+
+.message__get {
+    text-align: right;
+}
