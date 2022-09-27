@@ -27,12 +27,12 @@ const Dialogs = ({ chats, messages, createMessage }) => {
            </div>
             <div className={styles.messages}>
                 <div className={styles.messages__scroll}>
-                    { messages.map( (text, index) => <div key={index} className="message">{ text }</div>) }
-                    <div className={styles.message__send}>
+                    { messages.map( (text, index) => <div key={index} className="">{ text }</div>) }
+                    <div className={`${styles.message} ${styles.message__send}`}>
                         <h2>Ruslan</h2>
                         <p>sdasdasd asdasdasdf sdfsdfsdfsdfsdfs dfsdfsdfsdfsdfsd fsdfsdfsdf sdfsdfsdfsda dasdasdads</p>
                     </div>
-                    <div className={styles.message__get}>
+                    <div className={`${styles.message} ${styles.message__get}`}>
                         <h2>Roma</h2>
                         sdasdas dasdasdas dsdfsdfsdfsdf sdfsdfs dfsd asda sdasdasdas dadas dasdadadad asdsadsasassa sdasda sdas dasda sdasdasdasdd
                     </div>

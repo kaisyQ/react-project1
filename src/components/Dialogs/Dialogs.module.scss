@@ -63,20 +63,25 @@
     overflow-y: scroll;
 }
 
-.message__send,
-.message__get {
+
+
+// Все, что ниже в Message.module.scss
+.message {
     margin-bottom: 5px;
 
     h2 {
         margin-bottom: 2px;
         font-size: 20px;
     }
+
+    //.message.message__send
+    &__send {
+        text-align: left;
+    }
+
+    //.message.message__get
+    &__get {
+        text-align: right;
+    }
 }
 
-.message__send {
-    text-align: left;
-}
-
-.message__get {
-    text-align: right;
-}

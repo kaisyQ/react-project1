@@ -1,0 +1,18 @@
+.message {
+   margin-bottom: 5px;
+
+   h2 {
+       margin-bottom: 2px;
+       font-size: 20px;
+   }
+
+   //.message.message__send
+   &__send {
+       text-align: left;
+   }
+
+   //.message.message__get
+   &__get {
+       text-align: right;
+   }
+}
