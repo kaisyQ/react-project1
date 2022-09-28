@@ -27,48 +27,41 @@ const profileSlice = createSlice({
 export const { createNewPost, setProfile, setProfileStatus, updateStatus } = profileSlice.actions
 
 
-export const setProfileThunk = (userId) => (dispatch) => {
+export const setProfileThunk = (userId) => async (dispatch) => {
     if (!userId) {
-        authAPI.checkAuthMe().then(response => {
-            if (response.data.resultCode === 0) {
-                profileAPI.getProfile(response.data.data.id).then(response => {
-                    dispatch(setProfile(response.data))
-                })
-            } else {
-                console.error('err')
-            }
-        })
-    } else {
-        profileAPI.getProfile(userId).then(response => {
-            dispatch(setProfile(response.data))
-        })
-    }
-}
-
-export const setProfileStatusThunk = (userId) => (dispatch) => {
-    if (!userId) {
-        authAPI.checkAuthMe().then(response => {
-            if (response.data.resultCode === 0) {
-                profileAPI.getUserStatus(response.data.data.id).then(response => {
-                    dispatch(setProfileStatus(response.data))
-                }) 
-            } else {
-                console.error('err')
-            }
-        })
-    } else {
-        profileAPI.getUserStatus(userId).then(response => {
-            dispatch(setProfileStatus(response.data))
-        }) 
-    }
-}
-
-export const updateCurrentUserProfileStatus = (status) => (dispatch) => {
-    profileAPI.putMyStatus(status).then(response => {
-        if (response.resultCode === 0) {
-            dispatch(updateCurrentUserProfileStatus(status))
+        const response = await authAPI.checkAuthMe()
+        if (response.data.resultCode === 0) {
+            const responseData = await profileAPI.getProfile(response.data.data.id)
+            dispatch(setProfile(responseData.data))
+        } else {
+            console.error('err')
         }
-    })
+    } else {
+        const response = await profileAPI.getProfile(userId)
+        dispatch(setProfile(response.data))
+    }
+}
+
+export const setProfileStatusThunk = (userId) => async (dispatch) => {
+    if (!userId) {
+        const response = await authAPI.checkAuthMe()
+        if (response.data.resultCode === 0) {
+            const responseData = await profileAPI.getUserStatus(response.data.data.id)
+            dispatch(setProfileStatus(responseData.data))
+        } else {
+            console.error('err')
+        }
+    } else {
+        const response = await profileAPI.getUserStatus(userId)
+        dispatch(setProfileStatus(response.data))
+    }
+}
+
+export const updateCurrentUserProfileStatus = (status) => async (dispatch) => {
+    const response = await profileAPI.putMyStatus(status)
+    if (response.resultCode === 0) {
+        dispatch(updateCurrentUserProfileStatus(status))
+    }
 }
 
 export default profileSlice.reducer

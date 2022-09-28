@@ -49,44 +49,38 @@ export const {
 } = usersSlice.actions
 
 
-export const getUsers = (page) => {
-    return (dispatch) => {
-        dispatch(changeFetching(true))
-        usersAPI.getUsersFromServer(page).then( response => {
-            dispatch(totalCount(response.data.totalCount))
-            dispatch(loadUsers(response.data.items))
-            dispatch(changeFetching(false))
-        })
-    }
-}
-
-export const getUserAtNumPage = (page, count) => (dispatch) => {
+export const getUsers = (page) => async (dispatch) => {
     dispatch(changeFetching(true))
-    usersAPI.getPageUsersFromServer(page, count).then( response => {
-        dispatch(loadUsers(response.data.items))
-        dispatch(totalCount(response.data.totalCount))
-        dispatch(changeFetching(false))
-    })
+    const response = await usersAPI.getUsersFromServer(page)
+    dispatch(totalCount(response.data.totalCount))
+    dispatch(loadUsers(response.data.items))
+    dispatch(changeFetching(false))
 }
 
-export const makeUserFollowed = (id) => (dispatch) => {
-    dispatch(pushUserToFollowArr(id))
-    followAPI.followUser(id).then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(deleteUserInFollowArr(id)) 
-            dispatch(follow(id))  
-        } 
-    })
+export const getUserAtNumPage = (page, count) => async (dispatch) => {
+    dispatch(changeFetching(true))
+    const response = await usersAPI.getPageUsersFromServer(page, count)
+    dispatch(loadUsers(response.data.items))
+    dispatch(totalCount(response.data.totalCount))
+    dispatch(changeFetching(false))
 }
 
-export const makeUserUnfollowed = (id) => (dispatch) => {
+export const makeUserFollowed = (id) => async (dispatch) => {
     dispatch(pushUserToFollowArr(id))
-    followAPI.unfollowUser(id).then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(deleteUserInFollowArr(id)) 
-            dispatch(follow(id))  
-        } 
-    })
+    const response = await followAPI.followUser(id)
+    if (response.data.resultCode === 0) {
+        dispatch(deleteUserInFollowArr(id)) 
+        dispatch(follow(id))  
+    } 
+}
+
+export const makeUserUnfollowed = (id) => async (dispatch) => {
+    dispatch(pushUserToFollowArr(id))
+    const response = await followAPI.unfollowUser(id)
+    if (response.data.resultCode === 0) {
+        dispatch(deleteUserInFollowArr(id)) 
+        dispatch(follow(id))  
+    } 
 }
 
 export default usersSlice.reducer
