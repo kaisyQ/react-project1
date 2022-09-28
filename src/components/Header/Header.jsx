@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom"
 import styles from './Header.module.scss'
 import Button from './../Common/Button/Button'
 
-const Header = ({ isAuth, login, logout, appLogout }) => {
+const Header = ({ isAuth, login, logout }) => {
     return (
         <header className={styles.header}>
             <div className={styles.headerLogo}>
@@ -16,10 +16,7 @@ const Header = ({ isAuth, login, logout, appLogout }) => {
                 ?   <div className={styles.logout}>
                         <h4>{ login }</h4>
                         <div>
-                            <Button onClick={() => { 
-                                logout()
-                                appLogout() 
-                            }}>Log out</Button>
+                            <Button onClick={() => { logout() }}>Log out</Button>
                         </div>
                     </div>
                 :

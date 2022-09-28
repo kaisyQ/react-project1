@@ -34,12 +34,14 @@ export const { login, logout, changeFetching } = authSlice.actions
 export const CheckMe = () => (dispatch) => {
     dispatch(changeFetching(true))
     authAPI.checkAuthMe().then(response => {
-        dispatch(login({
-            isAuth: true, 
-            id: response.data.data.id,
-            email: response.data.data.email,
-            login: response.data.data.login
-        }))
+        if (response.data.resultCode === 0) {
+            dispatch(login({
+                isAuth: true, 
+                id: response.data.data.id,
+                email: response.data.data.email,
+                login: response.data.data.login
+            }))
+        }
     })
     dispatch(changeFetching(false))
 }
@@ -59,7 +61,7 @@ export const Login = (email, password, rememberMe) => (dispatch) => {
     })
 }
 
-export const Logout = () => (dispatch) => {
+export const logoutThunk = () => (dispatch) => {
     authAPI.logout().then(response => {
         if (response.resultCode === 0) {
             dispatch(logout())
