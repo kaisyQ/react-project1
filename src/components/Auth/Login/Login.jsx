@@ -2,10 +2,10 @@ import React from "react"
 import { Navigate  } from 'react-router-dom'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Button from "../Common/Button/Button"
+import Button from "../../Common/Button/Button"
 import styles from './Login.module.scss'
  
-const Login = ({ isAuth, LoginThnk }) => {
+const Login = ({ isAuth, login }) => {
   
     const loginFormik = useFormik({
         initialValues: {
@@ -21,7 +21,7 @@ const Login = ({ isAuth, LoginThnk }) => {
             repeatPassword: Yup.string().oneOf([Yup.ref('password'), null], "Does not match with Password!")
         }),
         onSubmit: (values) => {
-            LoginThnk(values.email, values.password, values.rememberMe)
+            login(values.email, values.password, values.rememberMe)
         }
     })
 

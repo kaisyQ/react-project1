@@ -14,7 +14,7 @@ import DialogContainer from './components/Dialogs/DialogsContainer'
 import UsersContainer from './components/Users/UsersContainer'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import HeaderContainer from './components/Header/HeaderContainer'
-import LoginContainer from './components/Login/LoginContainer'
+import AuthContainer from './components/Auth/AuthContainer'
 import Preloader from './components/Common/Preloader/Preloader'
 
 
@@ -40,7 +40,7 @@ class App extends React.Component {
                             <Route path='/News' element={ <News /> } />
                             <Route path='/Settings' element={ <Settings /> } />
                             <Route path='/Users' element={ <UsersContainer /> } />
-                            <Route path='/Login/*' element={ <LoginContainer /> } />
+                            <Route path='/Auth/*' element={ <AuthContainer /> } />
                         </Routes>
                     </div>
                 </div>

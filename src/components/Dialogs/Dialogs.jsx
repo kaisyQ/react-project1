@@ -27,15 +27,7 @@ const Dialogs = ({ chats, messages, createMessage }) => {
            </div>
             <div className={styles.messages}>
                 <div className={styles.messages__scroll}>
-                    { messages.map( (text, index) => <div key={index} className="">{ text }</div>) }
-                    <div className={`${styles.message} ${styles.message__send}`}>
-                        <h2>Ruslan</h2>
-                        <p>sdasdasd asdasdasdf sdfsdfsdfsdfsdfs dfsdfsdfsdfsdfsd fsdfsdfsdf sdfsdfsdfsda dasdasdads</p>
-                    </div>
-                    <div className={`${styles.message} ${styles.message__get}`}>
-                        <h2>Roma</h2>
-                        sdasdas dasdasdas dsdfsdfsdfsdf sdfsdfs dfsd asda sdasdasdas dadas dasdadadad asdsadsasassa sdasda sdas dasda sdasdasdasdd
-                    </div>
+                    { messages.map( (text, index) => <div key={index}>{ text }</div>) }
                 </div>
                 <form onSubmit={chatFormik.handleSubmit}>
                     <div contentEditable='true'
@@ -45,7 +37,7 @@ const Dialogs = ({ chats, messages, createMessage }) => {
                         placeholder='Enter new message...'
                     >
                     </div>
-                    <Button padding={'8px 10px'}>Send</Button>
+                    <Button type='submit' padding={'8px 10px'}>Send</Button>
                 </form>
            </div>
         </div>

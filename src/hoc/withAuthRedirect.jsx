@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom"
 
 const withAuthRedirectContainer = (Component) => {
     const RedirectComponent = (props) => {
-        if (!props.isAuth) return <Navigate to='/Login' />
+        if (!props.isAuth) return <Navigate to='/Auth' />
         
         return <Component {...props} />
     }
