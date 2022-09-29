@@ -4,6 +4,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import Button from '../../Common/Button/Button'
 import styles from '../Login/Login.module.scss'
+import Edit from '../../Common/EditButton/EditButton'
 
 const Register = ({isRegistered, registered}) => {
 
@@ -44,7 +45,10 @@ const Register = ({isRegistered, registered}) => {
                         <div className={styles.incorrectData}>{validFormik.errors.email}</div> : null}
                 </div>
                 <div className={styles.formItem}>
-                    <label htmlFor="userName">Username</label>
+                    <label htmlFor="userName">
+                        Username
+                        <Edit></Edit>
+                    </label>
                     <input
                         id="userName"
                         name='userName'
