@@ -5,7 +5,7 @@ import styles from './Header.module.scss'
 import Button from './../Common/Button/Button'
 
 const Header = ({ isAuth, login, logout }) => {
-    return (
+    return <>
         <header className={styles.header}>
             <div className={styles.headerLogo}>
                 <img src="./logo.png" alt="logo"/>
@@ -21,11 +21,11 @@ const Header = ({ isAuth, login, logout }) => {
                     </div>
                 :
                     <Button>
-                        <NavLink to='/Login'>Log in</NavLink>
+                        <NavLink to='/Auth'>Log in</NavLink>
                     </Button>
             }
         </header>
-    )
+    </>
 }
 
 export default Header

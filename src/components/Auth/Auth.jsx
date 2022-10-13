@@ -3,6 +3,7 @@ import { NavLink, Route, Routes, Navigate } from "react-router-dom"
 import Button from "../Common/Button/Button"
 import LoginContainer from "./Login/LoginContainer"
 import Register from "./Register/Register"
+
 const Auth = ({ isAuth }) => {
 
     if (isAuth) return <Navigate to='/Profile' /> 

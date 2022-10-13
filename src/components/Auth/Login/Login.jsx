@@ -1,12 +1,11 @@
 import React from "react"
-import { Navigate  } from 'react-router-dom'
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
 import Button from "../../Common/Button/Button"
 import styles from './Login.module.scss'
  
-const Login = ({ isAuth, login }) => {
-  
+const Login = ({ login }) => {
+
     const loginFormik = useFormik({
         initialValues: {
             email: '',
@@ -24,8 +23,6 @@ const Login = ({ isAuth, login }) => {
             login(values.email, values.password, values.rememberMe)
         }
     })
-
-    if (isAuth) return <Navigate to='/Profile' /> 
 
     return <form className={styles.loginForm} onSubmit={loginFormik.handleSubmit}>
         <div className={styles.loginFormItems}>
