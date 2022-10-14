@@ -1,11 +1,11 @@
 import { connect } from "react-redux"
 
 import { logoutThunk as logout } from '../../redux/auth-reducer'
-import { getIsAuth, getLogin } from "../../redux/selectors/auth-selector"
+import { getFirstname, getIsAuth, getLastname } from "../../redux/selectors/auth-selector"
 
 import Header from "./Header"
 
-const mapStateToProps = (state) => ({ isAuth: getIsAuth(state),  login: getLogin(state) })
+const mapStateToProps = (state) => ({ isAuth: getIsAuth(state),  firstname: getFirstname(state), lastname: getLastname(state) })
 
 const mapDispatchToProps = { logout }
 

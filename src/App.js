@@ -20,10 +20,6 @@ import Preloader from './components/Common/Preloader/Preloader'
 
 class App extends React.Component {
 
-    componentDidMount () {
-        this.props.CheckMe()
-    }
-
     render () {
         if (this.props.isFetching) return <Preloader />
         return <>
@@ -50,6 +46,6 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({ isFetching: getIsFetching(state) })
-const mapDispatchToProps = { CheckMe }
+const mapDispatchToProps = { }
 
 export default connect(mapStateToProps, mapDispatchToProps) (App)
