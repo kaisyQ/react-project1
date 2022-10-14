@@ -5,7 +5,6 @@ import styles from './Header.module.scss'
 import Button from './../Common/Button/Button'
 
 const Header = ({ isAuth, firstname, lastname, logout }) => {
-    debugger
     return <>
         <header className={styles.header}>
             <div className={styles.headerLogo}>

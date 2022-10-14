@@ -76,6 +76,21 @@ export const Login = (email, password, rememberMe) => async (dispatch) => {
     dispatch(changeFetching(false))
 }
 
+export const checkMe = () => async (dispatch) => {
+    dispatch(changeFetching(true))
+    const response = await authAPI.checkAuthMe()
+    const data = JSON.parse(response.data)
+    if (data.resultCode === 0) {
+        dispatch(login({
+            id: data.user.id,
+            email: data.user.email,
+            firstname: data.user.firstname,
+            lastname: data.user.lastname
+        }))
+    }
+    dispatch(changeFetching(false))
+}
+
 export const logoutThunk = () => async (dispatch) => { 
     dispatch(changeFetching(true))
     dispatch(logout())

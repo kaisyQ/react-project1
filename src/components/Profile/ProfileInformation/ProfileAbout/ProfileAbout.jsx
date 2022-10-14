@@ -12,8 +12,8 @@ const ProfileAbout = (props) => {
                     
                 }
                 {
-                    props.lookingForAJobDescription ?
-                        <p className={styles.aboutItem}>{props.lookingForAJobDescription}</p> :
+                    props.aboutMyJob ?
+                        <p className={styles.aboutItem}>{props.aboutMyJob}</p> :
                         <p className={styles.aboutItem}>Here will be something my job</p>
                 }
                 <p 
@@ -22,21 +22,43 @@ const ProfileAbout = (props) => {
                         {!showLnk ? 'Show Links' : 'Hide Links'} 
                 </p>
                 {
-                    showLnk && <div
-                        className={styles.profileLinks}>
-                        <div className={styles.linkIcon}>
-                            <i className="fa fa-github-square" aria-hidden="true"></i>
+                    showLnk && <>
+                        <div className={styles.profileLinks}>
+                            {
+                                props.links.vk === null ?
+                                <div className={styles.linkIcon}>
+                                    <a href={props.links.vk}>
+                                        <i className="fa fa-vk" aria-hidden="true"></i>
+                                    </a>
+                                </div> :
+                                <div className={styles.linkMessage}>
+                                    'I didn`t have a vk account...'
+                                </div>
+                            }    
+                            {
+                                props.links.twitter ?
+                                <div className={styles.linkIcon}>
+                                    <a href={props.links.twitter}>
+                                        <i className="fa fa-twitter" aria-hidden="true"></i>
+                                    </a>
+                                </div> :
+                                <div className={styles.linkMessage}>
+                                    'I didn`t have a twitter account...'
+                                </div>
+                            }   
+                            {
+                                props.links.facebook ?
+                                <div className={styles.linkIcon}>
+                                    <a href={props.links.facebook}>
+                                        <i className="fa fa-facebook-official" aria-hidden="true"></i>  
+                                    </a>
+                                </div> :
+                                <div className={styles.linkMessage}>
+                                    'I didn`t have a facebook account...'
+                                </div>
+                            }           
                         </div>
-                        <div className={styles.linkIcon}>
-                            <i className="fa fa-twitter" aria-hidden="true"></i>
-                        </div>
-                        <div className={styles.linkIcon}>
-                            <i className="fa fa-telegram" aria-hidden="true"></i>
-                        </div>
-                        <div className={styles.linkIcon}>
-                            <i className="fa fa-facebook-official" aria-hidden="true"></i>  
-                        </div>
-                    </div>
+                    </>
                 }
             </div >
         </>

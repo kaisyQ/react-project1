@@ -6,13 +6,12 @@ import ProfileStatus from "./ProfileStatus/ProfileStatus"
 import userImage from './../../../Images/User.png'
 
 const ProfileInformation = (props) => {
-
     const [status, setStatus] = useState('Write your status here')
     const [statusOnFocus, setStatusOnFocus] = useState(false)
 
     useEffect(() => {
-        setStatus(props.status)
-    }, [props.status])
+        setStatus(props.profile.status)
+    }, [props.profile.status])
 
     const onStatusDoubleClick = (ev) => {
         props.updateCurrentUserProfileStatus(status)
@@ -26,11 +25,12 @@ const ProfileInformation = (props) => {
     return <>
         <div className={styles.userAboutContainer}>
             <div className={styles.userImage}>
-                <img src={props.profile.largePhoto || userImage} alt="avatar" />
+                <img src={userImage} alt="avatar" />
             </div>
             
             <div className={styles.userAbout}>
-                <h2>{props.profile.fullName}</h2>
+                <h2>{props.profile.firstname}</h2>
+                <h2>{props.profile.lastname}</h2>
                 <ProfileStatus 
                     onStatusDoubleClick={onStatusDoubleClick}
                     onStatusChange={onStatusChange}
@@ -39,7 +39,11 @@ const ProfileInformation = (props) => {
                     statusOnFocus={statusOnFocus}
                 />
                 <hr />
-                <ProfileAbout />
+                <ProfileAbout  
+                    links={props.links}
+                    aboutMe={props.profile.aboutMe}
+                    aboutMyJob={props.profile.aboutMyJob}
+                />
             </div>  
         </div>
     </>

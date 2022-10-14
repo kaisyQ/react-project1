@@ -7,7 +7,6 @@ import defaultUserImage from '../../../Images/User.png'
 import Button from './../../Common/Button/Button'
 
 const User = (props) => {
-    debugger
     const onFollow = (id) => {
         props.makeUserFollowed(id)
     }
