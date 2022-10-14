@@ -8,6 +8,8 @@ const PageNav = ({currentPage, totalCount, pageCount, changeCurrentPage, getUser
         changeCurrentPage(pageIndx)
         getUsersToShow(pageIndx)
     }
+
+    return <></>
     return <>
         <table className={styles.pageNav}>
             <tbody>

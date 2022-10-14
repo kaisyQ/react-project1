@@ -1,23 +1,23 @@
 .btn {
     display: inline-block;
     padding: 10px 40px;
-    border: 1px solid rgb(49, 136, 207);
+    border: 2px solid rgb(49, 136, 207);
     border-radius: 5px;
     cursor: pointer;
     font: inherit;
     font-weight: 300;
 
+    transition: .2s;
     a {
         color: #000;
     }
-}
 
-.btn:hover {
-    transition: .4s;
-    background-color: rgb(207, 49, 128);
-    color: #fff;
-    border-color: #000;
-    a {
-        color: #fff;
+    &:hover {
+        box-shadow: 1px 1px 10px rgb(49, 136, 207);
+        color: #5580a3;
+
+        a {
+            color: #5580a3;
+        }
     }
 }

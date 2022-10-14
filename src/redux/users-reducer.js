@@ -6,7 +6,7 @@ const usersSlice = createSlice({
     initialState: {
         usersToShow: [],
         currentPage: 1,
-        pageCount: 20,
+        pageCount: 10,
         totalCount: 0,
         isFetching: true,
         userInFollowingProcess: []
@@ -52,16 +52,16 @@ export const {
 export const getUsers = (page) => async (dispatch) => {
     dispatch(changeFetching(true))
     const response = await usersAPI.getUsersFromServer(page)
-    dispatch(totalCount(response.data.totalCount))
-    dispatch(loadUsers(response.data.items))
+    dispatch(totalCount(response.data.users.length))
+    dispatch(loadUsers(response.data.users))
     dispatch(changeFetching(false))
 }
 
 export const getUserAtNumPage = (page, count) => async (dispatch) => {
     dispatch(changeFetching(true))
     const response = await usersAPI.getPageUsersFromServer(page, count)
-    dispatch(loadUsers(response.data.items))
-    dispatch(totalCount(response.data.totalCount))
+    dispatch(loadUsers(response.data.users))
+    dispatch(totalCount(response.data.users.length))
     dispatch(changeFetching(false))
 }
 

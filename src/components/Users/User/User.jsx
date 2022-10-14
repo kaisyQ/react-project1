@@ -7,6 +7,7 @@ import defaultUserImage from '../../../Images/User.png'
 import Button from './../../Common/Button/Button'
 
 const User = (props) => {
+    debugger
     const onFollow = (id) => {
         props.makeUserFollowed(id)
     }
@@ -23,10 +24,11 @@ const User = (props) => {
                         <td className={styles.userAvatar}>
                             <NavLink to={`/Profile/${props.user.id}`}>
                                 <div className={styles.avatar}>
-                                    <img src={ props.user.photos.large ? props.user.photos.large : defaultUserImage} alt="avatar"/>
+                                    <img src={defaultUserImage} alt="avatar"/>
                                 </div>
                             </NavLink>
-                            <p className={styles.userName}>{ props.user.name }</p>
+                            <p className={styles.userName}>{ props.user.firstname }</p>
+                            <p className={styles.userName}>{ props.user.lastname }</p>
                         </td>
                         <td className={styles.userStatus}>Im using this social network</td>
                         <td className={styles.userBnts}>

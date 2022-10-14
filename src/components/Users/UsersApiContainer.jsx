@@ -9,7 +9,6 @@ const UsersAPIContainer = (props) => {
     
     const getUsersToShow = (num) => { props.getUserAtNumPage(num, props.pageCount) }
 
-
     return <>
         <Users {...props} getUsersToShow={getUsersToShow} />  
     </>
