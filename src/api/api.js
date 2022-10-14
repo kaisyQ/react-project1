@@ -27,6 +27,12 @@ export const profileAPI = {
     },
     putMyStatus(status) {
         return instance.put('profile/status', {status})
+    },
+    createPost(id, text) {
+        return instance.post('post', { id, text })
+    },
+    deletePost(id) {
+        return instance.delete(`post/${id}`)
     }
 }
  

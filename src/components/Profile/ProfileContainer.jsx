@@ -26,7 +26,11 @@ const ProfileAPIContainer = ({ profile, links, updateCurrentUserProfileStatus, s
     
 }
 
-const mapStateToProps = (state) => { return { profile: getProfile(state), links: getLinks(state), isAuth: getIsAuth(state) }}
+const mapStateToProps = (state) => ({ 
+    profile: getProfile(state), 
+    links: getLinks(state), 
+    isAuth: getIsAuth(state)
+})
 const mapDispatchToProps = { setProfileThunk, setProfileStatusThunk, updateCurrentUserProfileStatus }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withAuthRedirectContainer(ProfileAPIContainer))

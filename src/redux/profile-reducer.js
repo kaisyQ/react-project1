@@ -4,7 +4,8 @@ import { createSlice } from "@reduxjs/toolkit"
 const profileSlice = createSlice({
     name: 'profile',
     initialState: {
-        posts: ['first post', 'second post'],
+        posts: [],
+        id: null,
         firstname: null,
         lastname: null,
         aboutMe: null,
@@ -14,7 +15,13 @@ const profileSlice = createSlice({
     },
     reducers: {
         createNewPost: (state, action) => {
-            state.posts.push(action.payload)
+            state.posts.push({
+                id: state.posts.length + 1,
+                text: action.payload
+            })
+        },
+        deletePost: (state, action) => {
+            state.posts = state.posts.filter(post => post.id !== action.payload)
         },
         setProfile: (state, action) => {
             state.status = action.payload.status
@@ -23,6 +30,7 @@ const profileSlice = createSlice({
             state.aboutMyJob = action.payload.aboutMyJob
             state.firstname = action.payload.firstname
             state.lastname = action.payload.lastname
+            state.id = action.payload.id
         
             const toLinks = {
                 vk: action.payload.vk,
@@ -42,7 +50,25 @@ const profileSlice = createSlice({
     }
 })
 
-export const { createNewPost, setProfile, setProfileStatus, updateStatus } = profileSlice.actions
+export const { deletePost, createNewPost, setProfile, setProfileStatus, updateStatus } = profileSlice.actions
+
+
+export const createNewPostThunk = (id, text) => async (dispatch) => {
+    const response = await profileAPI.createPost(id, text)
+    if (response.data.resultCode === 0) {
+        dispatch(createNewPost({
+            text, 
+            id: response.data.responsePost.id
+        }))
+    }
+}
+
+export const deletePostThunk = (id) => async (dispatch) => {
+    const response = await profileAPI.deletePost(id)
+    if (response.data.resultCode === 0) {
+        dispatch(deletePost(id))
+    }
+}
 
 
 export const setProfileThunk = (userId) => async (dispatch) => {
@@ -51,15 +77,14 @@ export const setProfileThunk = (userId) => async (dispatch) => {
         const data = JSON.parse(response.data)
         if (data.resultCode === 0) {
             const profileResponse = await profileAPI.getProfile(data.user.id)
-            console.log(profileResponse)
             dispatch(setProfile(JSON.parse(profileResponse.data)))
         } else {
             console.error('cannot read profile')
         }
         
     } else {
-        const response = await profileAPI.getProfile(userId)
-        dispatch(setProfile(response.data))
+        const profileResponse = await profileAPI.getProfile(userId)
+        dispatch(setProfile(JSON.parse(profileResponse.data)))
     }
 }
 
