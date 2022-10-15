@@ -52,18 +52,20 @@ export const {
 export const getUsers = (page) => async (dispatch) => {
     dispatch(changeFetching(true))
     const response = await usersAPI.getUsersFromServer(page)
-    console.log(response)
-    debugger
-    dispatch(totalCount(response.data.users.length))
-    dispatch(loadUsers(response.data.users))
+    if (response.data.resultCode === 0) {
+        dispatch(totalCount(response.data.responseUsers.length))
+        dispatch(loadUsers(response.data.responseUsers))
+    }
     dispatch(changeFetching(false))
 }
 
-export const getUserAtNumPage = (page, count) => async (dispatch) => {
+export const getUserAtNumPage = (page) => async (dispatch) => {
     dispatch(changeFetching(true))
-    const response = await usersAPI.getPageUsersFromServer(page, count)
-    dispatch(loadUsers(response.data.users))
-    dispatch(totalCount(response.data.users.length))
+    const response = await usersAPI.getPageUsersFromServer(page)
+    if (response.data.resultCode === 0) {
+        dispatch(loadUsers(response.data.responseUsers))
+    }
+    dispatch(totalCount(response.data.responseUsers.length))
     dispatch(changeFetching(false))
 }
 

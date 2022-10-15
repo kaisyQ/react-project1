@@ -4,7 +4,7 @@ import Users from "./Users"
 const UsersAPIContainer = (props) => {
 
     useEffect(() => {
-        props.getUsers(1)
+        props.getUsers(1, 10)
     }, [])
     
     const getUsersToShow = (num) => { props.getUserAtNumPage(num, props.pageCount) }
