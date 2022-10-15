@@ -1,25 +1,23 @@
-import React from "react"
+import React, { useEffect } from "react"
 import styles from './Dialogs.module.scss'
-import Button from './../Common/Button/Button'
 import { NavLink, useParams } from "react-router-dom"
-import { useFormik } from 'formik'
 import MessagesContainer from "./Messages/MessagesContainer"
 
 
-const Dialogs = ({ chats }) => {
+const Dialogs = ({ chats, setFriends }) => {
 
     const { id } = useParams()
+
+    console.log(chats)
+    useEffect(() => {
+        setFriends()
+    }, [setFriends])
 
     return (
         <div className={styles.content}>
            <div className={styles.dialogs}>
             {
-                chats
-                .map((dialogName, index) => <NavLink to="/Dialogs/1" className={styles.dialogs__item} key={index}>
-                        <div>
-                            {dialogName}
-                        </div>
-                    </NavLink>)
+                chats.map((chat, index) => <NavLink to={`/Dialogs/${chat.user.id}`} className={styles.dialogs__item} key={index}>{chat.user.firstname}</NavLink>)
             }
             <hr />
             <NavLink to="/Dialogs/3" className={styles.dialogs__item}>USER WITH ID 3</NavLink>

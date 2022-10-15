@@ -62,3 +62,10 @@ export const authAPI = {
         return instance.post('register', { email, password, firstname, lastname })
     }
 }
+
+
+export const dialogsApi = {
+    getFriends(){
+        return instance.get('friends')
+    }
+}
