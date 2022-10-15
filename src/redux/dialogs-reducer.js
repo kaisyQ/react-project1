@@ -10,14 +10,10 @@ const dialogsSlice = createSlice({
     },
     reducers: {
         updateMessages: (state, action) => {
-<<<<<<< HEAD
-            state.messages = action.payload 
-=======
-            state.messages = state.messages.concat(action.payload) 
+            state.messages = action.payload
         },
         setFriends: (state, action) => {
             state.chats = action.payload
->>>>>>> e7fe077675c5bd98e4656a77fa3837f3e0d4acae
         }        
     }
 })
