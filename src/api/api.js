@@ -44,10 +44,10 @@ export const followAPI = {
         return instance.get(`follow/${id}`)
     },
     followUser (id) {
-        return instance.post(`follow/${id}`, {})
+        return instance.patch(`follow`, {id})
     },
     unfollowUser (id) {
-        return instance.delete(`follow/${id}`)
+        return instance.patch(`unfollow`, {id})
     }
 }
 

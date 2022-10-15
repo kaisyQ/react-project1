@@ -17,7 +17,7 @@ const usersSlice = createSlice({
         },
         follow: (state, action) => {
             state.usersToShow = state.usersToShow
-                .map(user => user.id === action.payload ? ({ ...user, followed: !user.followed }) : user)
+                .map(user => user.id === action.payload ? ({ ...user, isFollowed: !user.isFollowed }) : user)
         },
         changeCurrentPage: (state, action) => {
             state.currentPage = action.payload

@@ -16,7 +16,7 @@ const Users = (props) => {
                 pageCount={props.pageCount}
             />
             <div className='users'>
-                { props.usersToShow.map(user => 
+                { props.usersToShow.map(user => props.currentUserId !== user.id ?
                     <User 
                         key={user.id} 
                         user={user} 
@@ -24,7 +24,7 @@ const Users = (props) => {
                         follow={props.follow}
                         makeUserFollowed={props.makeUserFollowed}
                         makeUserUnfollowed={props.makeUserUnfollowed}
-                    />)
+                    /> : <></>)
                 }
             </div>
         </div>
