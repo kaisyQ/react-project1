@@ -16,15 +16,16 @@ const Users = (props) => {
                 pageCount={props.pageCount}
             />
             <div className='users'>
-                { props.usersToShow.map(user => 
+                { props.usersToShow.map(user => props.currentUserId !== user.id ?
                     <User 
+                        isAuth={props.isAuth}
                         key={user.id} 
                         user={user} 
                         userInFollowingProcess={props.userInFollowingProcess}
                         follow={props.follow}
                         makeUserFollowed={props.makeUserFollowed}
                         makeUserUnfollowed={props.makeUserUnfollowed}
-                    />)
+                    /> : <></>)
                 }
             </div>
         </div>
