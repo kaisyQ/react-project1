@@ -9,7 +9,7 @@ const dialogsSlice = createSlice({
     },
     reducers: {
         updateMessages: (state, action) => {
-            state.messages = state.messages.concat(action.payload) 
+            state.messages = action.payload 
         }        
     }
 })

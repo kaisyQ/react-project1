@@ -2,7 +2,6 @@ import React from "react"
 import styles from './Dialogs.module.scss'
 import Button from './../Common/Button/Button'
 import { NavLink, useParams } from "react-router-dom"
-import { useFormik } from 'formik'
 import MessagesContainer from "./Messages/MessagesContainer"
 
 

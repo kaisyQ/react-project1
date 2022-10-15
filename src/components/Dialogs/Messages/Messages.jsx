@@ -21,6 +21,7 @@ const Messages = ({ currentUserId, chatWithId, updateMessages, firstname, messag
         })
         return () => {
             if (socket) {
+                socket.emit('save-messages')
                 socket.emit('disconnect')
             }
         }
@@ -42,6 +43,8 @@ const Messages = ({ currentUserId, chatWithId, updateMessages, firstname, messag
         ev.preventDefault()
         socket.emit('send-message', {
             message : {
+                fromId: currentUserId,
+                toId: chatWithId,
                 firstname: firstname,
                 text: messageText
             },
