@@ -49,16 +49,13 @@ const profileSlice = createSlice({
             state.links = toLinks
 
         },
-        setProfileStatus: (state, action) => {
-            state.status = action.payload
-        },
         updateStatus: (state, action) => {
             state.status = action.payload
         }
     }
 })
 
-export const { deletePost, createNewPost, updatePost, setProfile, setProfileStatus, updateStatus } = profileSlice.actions
+export const { deletePost, createNewPost, updatePost, setProfile, updateStatus } = profileSlice.actions
 
 
 export const createNewPostThunk = (id, text) => async (dispatch) => {
@@ -106,25 +103,12 @@ export const setProfileThunk = (userId) => async (dispatch) => {
     }
 }
 
-export const setProfileStatusThunk = (userId) => async (dispatch) => {
-    if (!userId) {
-        const response = await authAPI.checkAuthMe()
-        if (response.data.resultCode === 0) {
-            const responseData = await profileAPI.getUserStatus(response.data.data.id)
-            dispatch(setProfileStatus(responseData.data))
-        } else {
-            console.error('err')
-        }
-    } else {
-        const response = await profileAPI.getUserStatus(userId)
-        dispatch(setProfileStatus(response.data))
-    }
-}
-
-export const updateCurrentUserProfileStatus = (status) => async (dispatch) => {
-    const response = await profileAPI.putMyStatus(status)
+export const updateUserStatus = (status) => async (dispatch) => {
+    const response = await profileAPI.updateMyStatus(status)
+    console.log(response)
+    debugger
     if (response.resultCode === 0) {
-        dispatch(updateCurrentUserProfileStatus(status))
+        dispatch(updateStatus(status))
     }
 }
 

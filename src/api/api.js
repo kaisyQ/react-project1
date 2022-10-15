@@ -22,11 +22,8 @@ export const profileAPI = {
     getProfile (id) {
         return instance.get(`profile/${id}`)
     },
-    getUserStatus(id) {
-        return instance.get(`profile/status/${id}`)
-    },
-    putMyStatus(status) {
-        return instance.put('profile/status', {status})
+    updateMyStatus(status) {
+        return instance.patch('profile/status', { status })
     },
     createPost(id, text) {
         return instance.post('post', { id, text })

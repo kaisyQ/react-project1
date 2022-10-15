@@ -14,7 +14,7 @@ const ProfileInformation = (props) => {
     }, [props.profile.status])
 
     const onStatusDoubleClick = (ev) => {
-        props.updateCurrentUserProfileStatus(status)
+        props.updateUserStatus(status)
         setStatusOnFocus(!statusOnFocus)
     }
 

@@ -1,24 +1,23 @@
 import React, { useEffect } from "react"
 import { connect } from "react-redux"
 import { useParams } from "react-router-dom"
-import { setProfileThunk, setProfileStatusThunk, updateCurrentUserProfileStatus } from './../../redux/profile-reducer'
+import { setProfileThunk, updateUserStatus } from './../../redux/profile-reducer'
 import { getProfile, getLinks } from './../../redux/selectors/profile-selector'
 import { getIsAuth } from "../../redux/selectors/auth-selector"
 import withAuthRedirectContainer from "../../hoc/withAuthRedirect"
 import Profile from "./Profile"
 
-const ProfileAPIContainer = ({ profile, links, updateCurrentUserProfileStatus, setProfileStatusThunk, setProfileThunk }) => {
+const ProfileAPIContainer = ({ profile, links, updateUserStatus, setProfileThunk }) => {
     
     const { id } = useParams()
     
     useEffect(() => {
         setProfileThunk(id)
-        setProfileStatusThunk(id)
     }, [id])
 
     return <> 
         <Profile 
-            updateCurrentUserProfileStatus={updateCurrentUserProfileStatus}
+            updateUserStatus={updateUserStatus}
             profile={profile}
             links={links}
         />
@@ -31,7 +30,7 @@ const mapStateToProps = (state) => ({
     links: getLinks(state), 
     isAuth: getIsAuth(state)
 })
-const mapDispatchToProps = { setProfileThunk, setProfileStatusThunk, updateCurrentUserProfileStatus }
+const mapDispatchToProps = { setProfileThunk, updateUserStatus }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withAuthRedirectContainer(ProfileAPIContainer))
 
