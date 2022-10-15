@@ -18,6 +18,7 @@ const Users = (props) => {
             <div className='users'>
                 { props.usersToShow.map(user => props.currentUserId !== user.id ?
                     <User 
+                        isAuth={props.isAuth}
                         key={user.id} 
                         user={user} 
                         userInFollowingProcess={props.userInFollowingProcess}
