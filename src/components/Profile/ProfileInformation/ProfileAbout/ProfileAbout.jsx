@@ -1,8 +1,11 @@
 import React, { useState } from "react"
+import Button from "../../../Common/Button/Button"
+import EditProfileModalContainer from "./EditProfileModal/EditProfileModalContainer"
 import styles from './ProfileAbout.module.scss'
 
 const ProfileAbout = (props) => {
     const [showLnk, setShowLnk] = useState(false)
+    const [isEditModalShwing, setIsEditModalShwing] = useState(false)
     return <>
             <div className={styles.profileAbout}>
                 {
@@ -14,18 +17,25 @@ const ProfileAbout = (props) => {
                 {
                     props.aboutMyJob ?
                         <p className={styles.aboutItem}>{props.aboutMyJob}</p> :
-                        <p className={styles.aboutItem}>Here will be something my job</p>
+                        <p className={styles.aboutItem}>Here will be something about my job</p>
                 }
-                <p 
-                    className={`${styles.profileLnkNav} ${showLnk ? styles.withDwnArrow : styles.withUpArrow}`}
-                    onClick={() => {setShowLnk(showLnk => !showLnk)}}>
-                        {!showLnk ? 'Show Links' : 'Hide Links'} 
-                </p>
+                <div className={styles.profileAboutNav}>
+                    <p 
+                        className={`${styles.profileLnkNav} ${showLnk ? styles.withDwnArrow : styles.withUpArrow}`}
+                        onClick={() => {setShowLnk(showLnk => !showLnk)}}>
+                            {!showLnk ? 'Show Links' : 'Hide Links'} 
+                    </p>
+                    {
+                        props.userId === props.currentUserId ?   
+                            <Button padding={'10px 15px'} onClick={(ev) => { setIsEditModalShwing(true) }}>Edit Profile Information</Button> :
+                            <></>
+                    }
+                </div>
                 {
                     showLnk && <>
                         <div className={styles.profileLinks}>
                             {
-                                props.links.vk === null ?
+                                props.links.vk ?
                                 <div className={styles.linkIcon}>
                                     <a href={props.links.vk}>
                                         <i className="fa fa-vk" aria-hidden="true"></i>
@@ -61,6 +71,9 @@ const ProfileAbout = (props) => {
                     </>
                 }
             </div >
+            {
+                isEditModalShwing ? <EditProfileModalContainer setIsEditModalShwing={setIsEditModalShwing}/> : <></>
+            }
         </>
     
 }

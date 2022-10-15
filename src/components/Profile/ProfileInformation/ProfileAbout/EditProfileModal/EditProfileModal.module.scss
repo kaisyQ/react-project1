@@ -1,0 +1,35 @@
+.formContainer {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    position: fixed;
+    top: 50%; 
+    right: 50%;
+    transform: translate(50%, -50%);
+    background-color: cadetblue;
+    color: aliceblue;
+
+    input {
+        padding: 10px;
+        margin-left: 10px;
+        font-size: 14px;
+        border-radius: 3px;
+        border: 1px solid #000;
+    }
+
+}
+
+.formItem {
+    display: flex;
+    justify-content: space-between; 
+    margin: 10px 0;
+}
+
+.formBtn {
+    text-align: center;
+    margin-top: 10px;
+
+    button {
+        margin: 0 5px;
+    }
+}

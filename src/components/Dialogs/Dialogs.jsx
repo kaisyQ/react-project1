@@ -17,6 +17,7 @@ const Dialogs = ({ chats, messages, createMessage }) => {
     return (
         <div className={styles.content}>
            <div className={styles.dialogs}>
+<<<<<<< HEAD
                 {
                     chats
                     .map((dialogName, index) => <NavLink to="1" className={styles.dialogs__item} key={index}>
@@ -25,6 +26,16 @@ const Dialogs = ({ chats, messages, createMessage }) => {
                             </div>
                         </NavLink>)
                 }
+=======
+            {
+                chats
+                .map((dialogName, index) => <NavLink to="dialogs/1" className={styles.dialogs__item} key={index}>
+                        <div>
+                            {dialogName}
+                        </div>
+                    </NavLink>)
+            }
+>>>>>>> d0a17d3f170aed23c3892a7da707ebbf01d8cdb0
            </div>
             <div className={styles.messages}>
                 <div className={styles.messages__scroll}>

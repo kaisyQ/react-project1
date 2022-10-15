@@ -40,6 +40,8 @@ const ProfileInformation = (props) => {
                 />
                 <hr />
                 <ProfileAbout  
+                    userId={props.profile.id}
+                    currentUserId={props.currentUserId}
                     links={props.links}
                     aboutMe={props.profile.aboutMe}
                     aboutMyJob={props.profile.aboutMyJob}
