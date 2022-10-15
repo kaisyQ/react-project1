@@ -1,46 +1,33 @@
 import React from "react"
 import styles from './Dialogs.module.scss'
 import Button from './../Common/Button/Button'
-import { NavLink } from "react-router-dom"
+import { NavLink, useParams } from "react-router-dom"
 import { useFormik } from 'formik'
+import MessagesContainer from "./Messages/MessagesContainer"
 
 
-const Dialogs = ({ chats, messages, createMessage }) => {
+const Dialogs = ({ chats }) => {
 
-    const chatFormik = useFormik({
-        initialValues: {
-            newMessageText: ''
-        },
-        onSubmit: (values) => { createMessage(values.newMessageText) }
-    })
+    const { id } = useParams()
 
     return (
         <div className={styles.content}>
            <div className={styles.dialogs}>
             {
                 chats
-                .map((dialogName, index) => <NavLink to="dialogs/1" className={styles.dialogs__item} key={index}>
+                .map((dialogName, index) => <NavLink to="/Dialogs/1" className={styles.dialogs__item} key={index}>
                         <div>
                             {dialogName}
                         </div>
                     </NavLink>)
             }
+            <hr />
+            <NavLink to="/Dialogs/3" className={styles.dialogs__item}>USER WITH ID 3</NavLink>
+            <NavLink to="/Dialogs/2" className={styles.dialogs__item}>USER WITH ID 2</NavLink>
            </div>
-            <div className={styles.messages}>
-                <div className={styles.messages__scroll}>
-                    { messages.map( (text, index) => <div key={index}>{ text }</div>) }
-                </div>
-                <form onSubmit={chatFormik.handleSubmit}>
-                    <div contentEditable='true'
-                        name='newMessageText'
-                        value={chatFormik.values.newMessageText}
-                        onChange={chatFormik.handleChange}
-                        placeholder='Enter new message...'
-                    >
-                    </div>
-                    <Button type='submit' padding={'8px 10px'}>Send</Button>
-                </form>
-           </div>
+            {
+                id ? <MessagesContainer chatWithId={id} /> : <div>Please Select User To Chat</div>
+            }
         </div>
     )
 }
