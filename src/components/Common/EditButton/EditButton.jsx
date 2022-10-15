@@ -1,12 +1,11 @@
 import React from "react"
-import edit from "../.././../Images/pencil.png"
 import editSvg from "../../../Images/edit.svg"
 import styles from "./EditButton.module.scss"
 
-const EditButton = () => {
+const EditButton = ({ onClick }) => {
    return <>
       <button className={styles.edit}>
-         <img src={editSvg} alt="edit" width="22px" height="22px" className={styles.editImg}/>
+         <img src={editSvg} alt="edit" width="45px" height="45px" className={styles.editImg} onClick={onClick} />
       </button>
    </>
 }

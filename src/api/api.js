@@ -33,6 +33,9 @@ export const profileAPI = {
     },
     deletePost(id) {
         return instance.delete(`post/${id}`)
+    },
+    updatePost(id, text) {
+        return instance.patch(`post`, { id, text })
     }
 }
  

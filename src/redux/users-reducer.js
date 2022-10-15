@@ -52,6 +52,8 @@ export const {
 export const getUsers = (page) => async (dispatch) => {
     dispatch(changeFetching(true))
     const response = await usersAPI.getUsersFromServer(page)
+    console.log(response)
+    debugger
     dispatch(totalCount(response.data.users.length))
     dispatch(loadUsers(response.data.users))
     dispatch(changeFetching(false))

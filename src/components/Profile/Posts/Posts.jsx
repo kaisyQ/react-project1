@@ -1,7 +1,7 @@
 import React  from "react"
 import styles from './Posts.module.scss'
 import { useFormik } from 'formik';
-import PostContainer from './Post/PostContainer'
+import Post from './Post/Post'
 import Button from './../../Common/Button/Button'
 
 const Posts = ({ createNewPost, posts, currentUserId, id }) => {
@@ -41,7 +41,7 @@ const Posts = ({ createNewPost, posts, currentUserId, id }) => {
                         posts.length !== 0 ? 
                         <>
                             <h4>All Posts</h4> 
-                            { posts.map((post, index) => <PostContainer currentUserId={currentUserId} tmpId={id} key={index} {...post} />) }
+                            { posts.map((post, index) => <Post currentUserId={currentUserId} tmpUserId={id} key={index} {...post} />) }
                         </>
                         : <div>This wall is empty...</div>
                     }

@@ -16,12 +16,20 @@ const profileSlice = createSlice({
     reducers: {
         createNewPost: (state, action) => {
             state.posts.push({
-                id: state.posts.length + 1,
-                text: action.payload
+                id: action.payload.id,
+                text: action.payload.text
             })
         },
         deletePost: (state, action) => {
             state.posts = state.posts.filter(post => post.id !== action.payload)
+        },
+        updatePost: (state, action) => {
+            state.posts = state.posts.map(post => {
+                if(post.id === action.payload.id) {
+                    post.text = action.payload.text
+                }
+                return post
+            })
         },
         setProfile: (state, action) => {
             state.status = action.payload.status
@@ -50,7 +58,7 @@ const profileSlice = createSlice({
     }
 })
 
-export const { deletePost, createNewPost, setProfile, setProfileStatus, updateStatus } = profileSlice.actions
+export const { deletePost, createNewPost, updatePost, setProfile, setProfileStatus, updateStatus } = profileSlice.actions
 
 
 export const createNewPostThunk = (id, text) => async (dispatch) => {
@@ -69,6 +77,16 @@ export const deletePostThunk = (id) => async (dispatch) => {
         dispatch(deletePost(id))
     }
 }
+
+export const updatePostThunk = (id, text) => async (dispatch) => {
+    const response = await profileAPI.updatePost(id, text)
+    if (response.data.resultCode === 0) {
+        dispatch(updatePost({
+            text: response.data.responsePost.text,
+            id: response.data.responsePost.id
+        }))
+    }
+} 
 
 
 export const setProfileThunk = (userId) => async (dispatch) => {
