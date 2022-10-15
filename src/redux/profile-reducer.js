@@ -39,23 +39,24 @@ const profileSlice = createSlice({
             state.firstname = action.payload.firstname
             state.lastname = action.payload.lastname
             state.id = action.payload.id
-        
-            const toLinks = {
-                vk: action.payload.vk,
-                facebook: action.payload.facebook,
-                twitter: action.payload.twitter
-            }
 
-            state.links = toLinks
+            state.links = action.payload.links
 
         },
         updateStatus: (state, action) => {
             state.status = action.payload
+        },
+        updateProfile: (state, action) => {
+            state.aboutMe = action.payload.aboutMe
+            state.aboutMyJob = action.payload.aboutMyJob
+            state.links.vk = action.payload.vk
+            state.links.facebook = action.payload.facebook
+            state.links.twitter = action.payload.twitter
         }
     }
 })
 
-export const { deletePost, createNewPost, updatePost, setProfile, updateStatus } = profileSlice.actions
+export const { deletePost, createNewPost, updatePost, setProfile, updateStatus, updateProfile } = profileSlice.actions
 
 
 export const createNewPostThunk = (id, text) => async (dispatch) => {
@@ -90,6 +91,7 @@ export const setProfileThunk = (userId) => async (dispatch) => {
     if (!userId) {
         const response = await authAPI.checkAuthMe()
         const data = JSON.parse(response.data)
+
         if (data.resultCode === 0) {
             const profileResponse = await profileAPI.getProfile(data.user.id)
             dispatch(setProfile(JSON.parse(profileResponse.data)))
@@ -105,11 +107,23 @@ export const setProfileThunk = (userId) => async (dispatch) => {
 
 export const updateUserStatus = (status) => async (dispatch) => {
     const response = await profileAPI.updateMyStatus(status)
-    console.log(response)
-    debugger
     if (response.resultCode === 0) {
         dispatch(updateStatus(status))
     }
 }
 
-export default profileSlice.reducer
+export const updateProfileThunk = (values) => async (dispatch) => {
+    const response = await profileAPI.editProfileInfo(values.aboutMe, values.aboutMyJob, values.vk, values.twitter, values.facebook)
+    if (response.resultCode === 0) {
+        dispatch(updateProfile({ 
+            aboutMe: values.aboutMe, 
+            aboutMyJob: values.aboutMyJob, 
+            vk: values.vk, 
+            twitter: values.twitter, 
+            facebook: values.facebook 
+        }))
+    }
+}
+
+
+export default profileSlice.reducer 

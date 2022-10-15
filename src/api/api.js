@@ -33,6 +33,9 @@ export const profileAPI = {
     },
     updatePost(id, text) {
         return instance.patch(`post`, { id, text })
+    },
+    editProfileInfo(aboutMe, aboutMyJob, vk, twitter, facebook) {
+        return instance.put('profile', { aboutMe, aboutMyJob, vk, twitter, facebook })
     }
 }
  

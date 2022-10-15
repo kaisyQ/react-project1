@@ -16,14 +16,14 @@ const Dialogs = ({ chats, messages, createMessage }) => {
     return (
         <div className={styles.content}>
            <div className={styles.dialogs}>
-                {
-                    chats
-                    .map((dialogName, index) => <NavLink to="dialogs/1" className={styles.dialogs__item} key={index}>
-                            <div>
-                                {dialogName}
-                            </div>
-                        </NavLink>)
-                }
+            {
+                chats
+                .map((dialogName, index) => <NavLink to="dialogs/1" className={styles.dialogs__item} key={index}>
+                        <div>
+                            {dialogName}
+                        </div>
+                    </NavLink>)
+            }
            </div>
             <div className={styles.messages}>
                 <div className={styles.messages__scroll}>
