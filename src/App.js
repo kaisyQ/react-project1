@@ -9,6 +9,7 @@ import './App.scss'
 import NavBar from './components/NavBar/NavBar'
 import News from './components/News/News'
 import Settings from './components/Settings/Settings'
+import GlobalChat from './components/GlobalChat/GlobalChat'
 
 import DialogContainer from './components/Dialogs/DialogsContainer'
 import UsersContainer from './components/Users/UsersContainer'
@@ -35,6 +36,7 @@ class App extends React.Component {
                             <Route path='/Profile/:id' element={ <ProfileContainer /> } />
                             <Route path='/News' element={ <News /> } />
                             <Route path='/Settings' element={ <Settings /> } />
+                            <Route path='/GlobalChat' element={ <GlobalChat /> } />
                             <Route path='/Users' element={ <UsersContainer /> } />
                             <Route path='/Auth/*' element={ <AuthContainer /> } />
                         </Routes>

@@ -2,7 +2,8 @@ import React from "react"
 import styles from './Dialogs.module.scss'
 import Button from './../Common/Button/Button'
 import { NavLink } from "react-router-dom"
-import { useFormik } from 'formik';
+import { useFormik } from 'formik'
+
 
 const Dialogs = ({ chats, messages, createMessage }) => {
 
@@ -18,7 +19,7 @@ const Dialogs = ({ chats, messages, createMessage }) => {
            <div className={styles.dialogs}>
                 {
                     chats
-                    .map((dialogName, index) => <NavLink to="dialogs/1" className={styles.dialogs__item} key={index}>
+                    .map((dialogName, index) => <NavLink to="1" className={styles.dialogs__item} key={index}>
                             <div>
                                 {dialogName}
                             </div>

@@ -10,6 +10,7 @@ const NavBar = () => {
             <NavLink to="/Dialogs"><div className={css.navItem}>Messages</div></NavLink>
             <NavLink to="/News"><div className={css.navItem}>News</div></NavLink>
             <NavLink to="/Settings"><div className={css.navItem}>Settings</div></NavLink>
+            <NavLink to="/GlobalChat"><div className={css.navItem}>Global Chat</div></NavLink>
         </nav>
     </>
 }
